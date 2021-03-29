@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>httpss://edg7928.gitee.io/2021/03/29/2021-2-8 树 123026/</loc>
+    
+    <lastmod>2021-03-29</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>httpss://edg7928.gitee.io/2021/02/22/我的第一篇博客/</loc>
     
     <lastmod>2021-03-29</lastmod>
@@ -73,6 +80,20 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>httpss://edg7928.gitee.io/tags/数据结构/</loc>
+    <lastmod>2021-03-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/tags/树/</loc>
+    <lastmod>2021-03-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -91,6 +112,27 @@
   
   <url>
     <loc>httpss://edg7928.gitee.io/categories/前端/后端/Java/</loc>
+    <lastmod>2021-03-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/categories/leetcode/</loc>
+    <lastmod>2021-03-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/categories/leetcode/后端/</loc>
+    <lastmod>2021-03-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/categories/leetcode/后端/Java/</loc>
     <lastmod>2021-03-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
