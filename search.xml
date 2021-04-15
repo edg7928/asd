@@ -81,108 +81,10 @@
       </tags>
   </entry>
   <entry>
-    <title>02_类加载子系统</title>
-    <url>/2021/04/15/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、内存结构的概述"><a href="#1、内存结构的概述" class="headerlink" title="1、内存结构的概述"></a>1、内存结构的概述</h1><p>开始讲之前，先看一下内存图</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E7%AE%80%E5%9B%BE.jpg" alt="第02章_JVM架构-简图"> </p>
-<p>下面是更加详细的图，有英文图，还有中文图</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E8%8B%B1.jpg" alt="第02章_JVM架构-英"> </p>
-<p>中文图如下：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E4%B8%AD.jpg" alt="第02章_JVM架构-中"> </p>
-<p>如果想自己写一个java虚拟机的话，主要考虑哪些结构？  类加载器 和 执行引擎</p>
-<h1 id="2、类加载器与类的加载过程"><a href="#2、类加载器与类的加载过程" class="headerlink" title="2、类加载器与类的加载过程"></a>2、类加载器与类的加载过程</h1><h2 id="2-1、类加载子系统的作用"><a href="#2-1、类加载子系统的作用" class="headerlink" title="2.1、类加载子系统的作用"></a>2.1、类加载子系统的作用</h2><blockquote>
-<p>1、类加载子系统负责从<strong>文件系统 **或者</strong>网络<strong>中加载class文件，class文件在文件的开头有</strong>特定的文件标识**。</p>
-<p>2、ClassLoader只负责class文件的加载，至于它（指的是class文件）是否可以运行，则由<strong>执行引擎</strong>（Execution Engine）决定。</p>
-<p>3、<strong>加载的类信息</strong>存放在一块称为<strong>方法区</strong>的内存空间中。除了类的信息外，方法区中还会存放<strong>运行时常量池信息</strong>，可能还包括字符串字面量和数字常量（这部分常量信息时class文件常量池部分的内存映射）。</p>
-</blockquote>
-<h2 id="2-2、类加载器ClassLoader角色"><a href="#2-2、类加载器ClassLoader角色" class="headerlink" title="2.2、类加载器ClassLoader角色"></a>2.2、类加载器ClassLoader角色</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405154241641.png" alt="image-20210405154241641"> </p>
-<h2 id="2-3、类的加载过程"><a href="#2-3、类的加载过程" class="headerlink" title="2.3、类的加载过程"></a>2.3、类的加载过程</h2><p><strong>简略过程</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405154524267.png" alt="image-20210405154524267"> </p>
-<p><strong>详细过程</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/%E7%AC%AC02%E7%AB%A0_%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B.jpg" alt="第02章_类的加载过程"> </p>
-<p><strong>加载</strong>：</p>
-<blockquote>
-<p>1、通过一个类的全限定名获取定义此类的二进制字节流</p>
-<p>2、讲这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</p>
-<p>3、<strong>在内存中生成一个代表这个类的java.lang.Class对象</strong>，作为方法区这个类的各种数据的访问接口</p>
-</blockquote>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210406201208952.png" alt="image-20210406201208952"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405155623036.png" alt="image-20210405155623036"> </p>
-<p><strong>链接</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405155954724.png" alt="image-20210405155954724"> </p>
-<p><strong>初始化</strong>：</p>
-<blockquote>
-<p>1、<strong>初始化阶段就是执行类构造器方法<clinit>() 的过程</clinit></strong></p>
-<p>2、此方法不需要定义，是javac编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并来的。</p>
-<p>3、构造器方法中的指令按语句在源文件中出现的顺序执行</p>
-<p>4、**<clinit>() 不同于类的构造器。**（关联：构造器是虚拟机视角下的<init>() ）</init></clinit></p>
-<p>5、若该类有父类，JVM会保证子类的<clinit>()执行前，父类的已经执行完毕。</clinit></p>
-<p>6、虚拟机必须保证一个类的<clinit>()方法在多线程下被同步加锁。</clinit></p>
-</blockquote>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405192944395.png" alt="image-20210405192944395"> </p>
-<h1 id="3、类加载器的分类"><a href="#3、类加载器的分类" class="headerlink" title="3、类加载器的分类"></a>3、类加载器的分类</h1><h2 id="3-1、概述"><a href="#3-1、概述" class="headerlink" title="3.1、概述"></a>3.1、概述</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405193156149.png" alt="image-20210405193156149"> </p>
-<p>下图中，最上边的是引导类加载器，下边的扩展类加载器和系统类（应用程序类）加载器都是自定义加载器</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405193519650.png" alt="image-20210405193519650"> </p>
-<p>这里面的四者的关系是包含的关系，并不是上下层的关系，也不是子父类继承的关系</p>
-<p>对于用户自定义类来说：默认使用的是系统类加载器</p>
-<p>String类使用的是引导类加载器进行加载。 Java的核心类库都是使用的引导类加载器进行加载的</p>
-<p>引导类加载器是在程序中获取不到的（输出null），就因为它只用来加载核心类库，我们写的代码鸟都不鸟</p>
-<p>下图是相关的程序实例：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405195942291.png" alt="image-20210405195942291"> </p>
-<h2 id="3-2、虚拟机自带的加载器"><a href="#3-2、虚拟机自带的加载器" class="headerlink" title="3.2、虚拟机自带的加载器"></a>3.2、虚拟机自带的加载器</h2><h3 id="3-2-1、启动类加载器（引导类加载器，BootStrap-ClassLoader）"><a href="#3-2-1、启动类加载器（引导类加载器，BootStrap-ClassLoader）" class="headerlink" title="3.2.1、启动类加载器（引导类加载器，BootStrap ClassLoader）"></a>3.2.1、启动类加载器（引导类加载器，BootStrap ClassLoader）</h3><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405200707333.png" alt="image-20210405200707333"> </p>
-<p>解释”加载拓展类和应用程序类加载器“：由上面的知识可知，拓展类加载器和应用程序类加载器是一个对象，这个对象就要对应着一个类就需要加载，这个类属于核心类库，所以也需要使用引导类加载器进行加载</p>
-<h3 id="3-2-2、拓展类加载器（Extension-ClassLoader）"><a href="#3-2-2、拓展类加载器（Extension-ClassLoader）" class="headerlink" title="3.2.2、拓展类加载器（Extension ClassLoader）"></a>3.2.2、拓展类加载器（Extension ClassLoader）</h3><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405201820866.png" alt="image-20210405201820866"> </p>
-<p>由第一条知：$符号是内部类的意思</p>
-<p>注：这里的父类加载器不是Java中的继承关系，是指这个类是由哪个加载器加载进内存的</p>
-<h3 id="3-2-3、应用程序类加载器（系统类加载器，App-ClassLoader）"><a href="#3-2-3、应用程序类加载器（系统类加载器，App-ClassLoader）" class="headerlink" title="3.2.3、应用程序类加载器（系统类加载器，App ClassLoader）"></a>3.2.3、应用程序类加载器（系统类加载器，App ClassLoader）</h3><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405202750163.png" alt="image-20210405202750163"> </p>
-<p>有人说，这里的父类加载器可以改成上级加载器，意思是由上一层加载器加载；周志明书里说，类加载器之间的关系不是是靠继承关系实现的，而是靠组合关系实现的</p>
-<p>相关程序示例：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405204232060.png" alt="image-20210405204232060"> </p>
-<p>运行结果：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405204319220.png" alt="image-20210405204319220"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405204354540.png" alt="image-20210405204354540"> </p>
-<h3 id="3-2-4、用户自定义类加载器（User-Defined-Class-Loader）"><a href="#3-2-4、用户自定义类加载器（User-Defined-Class-Loader）" class="headerlink" title="3.2.4、用户自定义类加载器（User Defined Class Loader）"></a>3.2.4、用户自定义类加载器（User Defined Class Loader）</h3><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405204904397.png" alt="image-20210405204904397"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405214114012.png" alt="image-20210405214114012"> </p>
-<h1 id="4、ClassLoader的使用说明"><a href="#4、ClassLoader的使用说明" class="headerlink" title="4、ClassLoader的使用说明"></a>4、ClassLoader的使用说明</h1><p>ClassLoader类，是一个抽象类，其后所有的类加载器都继承自ClassLoader（不包括启动类加载器）</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405214547995.png" alt="image-20210405214547995"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405214731940.png" alt="image-20210405214731940"> </p>
-<p>获取ClassLoader的途径</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405214818091.png" alt="image-20210405214818091"> </p>
-<h1 id="5、双亲委派机制（重要）"><a href="#5、双亲委派机制（重要）" class="headerlink" title="5、双亲委派机制（重要）"></a>5、双亲委派机制（重要）</h1><p>Java虚拟机对class文件采用的是<strong>按需加载</strong>的方式，也就是说，当需要使用该类的时候才会将它的class为见加载到内存生成class对象。而且加载某个类的class文件时，Java虚拟机采用的是<strong>双亲委派模式</strong>，即把请求交由父类处理，他是一种任务委派模式。有人用通俗语言解释这个模式：<strong>我爸是李刚，有事找我爸</strong>。</p>
-<p><strong>工作原理</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405220047876.png" alt="image-20210405220047876"> </p>
-<p>注：这里不是继承。</p>
-<p><strong>举例1</strong>：孙子、父亲、爷爷，互相让苹果</p>
-<p><strong>举例2</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405221552015.png" alt="image-20210405221552015"> </p>
-<p><strong>优势</strong>：</p>
-<blockquote>
-<p>1、避免类的重复加载</p>
-<p>2、保护程序安全，防止核心API被随意篡改。例如，自定义类java.lang.String、自定义类java.lang.Sxll</p>
-</blockquote>
-<p><strong>沙箱安全机制：</strong></p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405221653866.png" alt="image-20210405221653866"> </p>
-<h1 id="6、其他"><a href="#6、其他" class="headerlink" title="6、其他"></a>6、其他</h1><p>补充内容1：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405221927547.png" alt="image-20210405221927547"> </p>
-<p>补充内容2：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405222123517.png" alt="image-20210405222123517"> </p>
-<p>类的主动使用和被动使用：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405222305101.png" alt="image-20210405222305101"> </p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>03_运行时数据区概述及线程</title>
     <url>/2021/04/15/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><h2 id="1-1、从这一节开始，就要进行运行时数据区的讲解"><a href="#1-1、从这一节开始，就要进行运行时数据区的讲解" class="headerlink" title="1.1、从这一节开始，就要进行运行时数据区的讲解"></a>1.1、从这一节开始，就要进行运行时数据区的讲解</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E7%AE%80%E5%9B%BE.jpg" alt="第02章_JVM架构-简图"> </p>
+    <content><![CDATA[<h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><span id="more"></span>
+<h2 id="1-1、从这一节开始，就要进行运行时数据区的讲解"><a href="#1-1、从这一节开始，就要进行运行时数据区的讲解" class="headerlink" title="1.1、从这一节开始，就要进行运行时数据区的讲解"></a>1.1、从这一节开始，就要进行运行时数据区的讲解</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E7%AE%80%E5%9B%BE.jpg" alt="第02章_JVM架构-简图"> </p>
 <p>下图是引入运行时数据区，“？”部分就是接下来的重点</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/%E7%AC%AC03%E7%AB%A0_%E5%BC%95%E5%85%A5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA.jpg" alt="第03章_引入运行时数据区"> </p>
 <p>有趣的举例（康师傅真牛逼）</p>
@@ -214,8 +116,8 @@
   <entry>
     <title>04_程序计数器（PC寄存器）</title>
     <url>/2021/04/15/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、PC-Register介绍"><a href="#1、PC-Register介绍" class="headerlink" title="1、PC Register介绍"></a>1、PC Register介绍</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212158867.png" alt="image-20210406212158867"> </p>
+    <content><![CDATA[<h1 id="1、PC-Register介绍"><a href="#1、PC-Register介绍" class="headerlink" title="1、PC Register介绍"></a>1、PC Register介绍</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212158867.png" alt="image-20210406212158867"> </p>
 <p><strong>作用</strong>：</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212426121.png" alt="image-20210406212426121"> </p>
 <p><strong>介绍</strong>：</p>
@@ -248,8 +150,8 @@
   <entry>
     <title>05_虚拟机栈</title>
     <url>/2021/04/15/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、虚拟机栈概述"><a href="#1、虚拟机栈概述" class="headerlink" title="1、虚拟机栈概述"></a>1、虚拟机栈概述</h1><h2 id="1-1、虚拟机出现的背景"><a href="#1-1、虚拟机出现的背景" class="headerlink" title="1.1、虚拟机出现的背景"></a>1.1、虚拟机出现的背景</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407150650677.png" alt="image-20210407150650677"> </p>
+    <content><![CDATA[<h1 id="1、虚拟机栈概述"><a href="#1、虚拟机栈概述" class="headerlink" title="1、虚拟机栈概述"></a>1、虚拟机栈概述</h1><span id="more"></span>
+<h2 id="1-1、虚拟机出现的背景"><a href="#1-1、虚拟机出现的背景" class="headerlink" title="1.1、虚拟机出现的背景"></a>1.1、虚拟机出现的背景</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407150650677.png" alt="image-20210407150650677"> </p>
 <h2 id="1-2、初步印象"><a href="#1-2、初步印象" class="headerlink" title="1.2、初步印象"></a>1.2、初步印象</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407150826400.png" alt="image-20210407150826400"> </p>
 <p>注：这样的理解是狭义的，不全面的。C++的内存结构主体上就是栈和堆，可能受其影响。实际上Java的划分更加的细致。</p>
 <h2 id="1-3、内存中的栈和堆"><a href="#1-3、内存中的栈和堆" class="headerlink" title="1.3、内存中的栈和堆"></a>1.3、内存中的栈和堆</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407151244600.png" alt="image-20210407151244600"> </p>
@@ -381,10 +283,108 @@
       </tags>
   </entry>
   <entry>
+    <title>02_类加载子系统</title>
+    <url>/2021/04/15/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<span id="more"></span>
+<h1 id="1、内存结构的概述"><a href="#1、内存结构的概述" class="headerlink" title="1、内存结构的概述"></a>1、内存结构的概述</h1><p>开始讲之前，先看一下内存图</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E7%AE%80%E5%9B%BE.jpg" alt="第02章_JVM架构-简图"> </p>
+<p>下面是更加详细的图，有英文图，还有中文图</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E8%8B%B1.jpg" alt="第02章_JVM架构-英"> </p>
+<p>中文图如下：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E4%B8%AD.jpg" alt="第02章_JVM架构-中"> </p>
+<p>如果想自己写一个java虚拟机的话，主要考虑哪些结构？  类加载器 和 执行引擎</p>
+<h1 id="2、类加载器与类的加载过程"><a href="#2、类加载器与类的加载过程" class="headerlink" title="2、类加载器与类的加载过程"></a>2、类加载器与类的加载过程</h1><h2 id="2-1、类加载子系统的作用"><a href="#2-1、类加载子系统的作用" class="headerlink" title="2.1、类加载子系统的作用"></a>2.1、类加载子系统的作用</h2><blockquote>
+<p>1、类加载子系统负责从<strong>文件系统 **或者</strong>网络<strong>中加载class文件，class文件在文件的开头有</strong>特定的文件标识**。</p>
+<p>2、ClassLoader只负责class文件的加载，至于它（指的是class文件）是否可以运行，则由<strong>执行引擎</strong>（Execution Engine）决定。</p>
+<p>3、<strong>加载的类信息</strong>存放在一块称为<strong>方法区</strong>的内存空间中。除了类的信息外，方法区中还会存放<strong>运行时常量池信息</strong>，可能还包括字符串字面量和数字常量（这部分常量信息时class文件常量池部分的内存映射）。</p>
+</blockquote>
+<h2 id="2-2、类加载器ClassLoader角色"><a href="#2-2、类加载器ClassLoader角色" class="headerlink" title="2.2、类加载器ClassLoader角色"></a>2.2、类加载器ClassLoader角色</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405154241641.png" alt="image-20210405154241641"> </p>
+<h2 id="2-3、类的加载过程"><a href="#2-3、类的加载过程" class="headerlink" title="2.3、类的加载过程"></a>2.3、类的加载过程</h2><p><strong>简略过程</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405154524267.png" alt="image-20210405154524267"> </p>
+<p><strong>详细过程</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/%E7%AC%AC02%E7%AB%A0_%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B.jpg" alt="第02章_类的加载过程"> </p>
+<p><strong>加载</strong>：</p>
+<blockquote>
+<p>1、通过一个类的全限定名获取定义此类的二进制字节流</p>
+<p>2、讲这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</p>
+<p>3、<strong>在内存中生成一个代表这个类的java.lang.Class对象</strong>，作为方法区这个类的各种数据的访问接口</p>
+</blockquote>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210406201208952.png" alt="image-20210406201208952"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405155623036.png" alt="image-20210405155623036"> </p>
+<p><strong>链接</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405155954724.png" alt="image-20210405155954724"> </p>
+<p><strong>初始化</strong>：</p>
+<blockquote>
+<p>1、<strong>初始化阶段就是执行类构造器方法<clinit>() 的过程</clinit></strong></p>
+<p>2、此方法不需要定义，是javac编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并来的。</p>
+<p>3、构造器方法中的指令按语句在源文件中出现的顺序执行</p>
+<p>4、**<clinit>() 不同于类的构造器。**（关联：构造器是虚拟机视角下的<init>() ）</init></clinit></p>
+<p>5、若该类有父类，JVM会保证子类的<clinit>()执行前，父类的已经执行完毕。</clinit></p>
+<p>6、虚拟机必须保证一个类的<clinit>()方法在多线程下被同步加锁。</clinit></p>
+</blockquote>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405192944395.png" alt="image-20210405192944395"> </p>
+<h1 id="3、类加载器的分类"><a href="#3、类加载器的分类" class="headerlink" title="3、类加载器的分类"></a>3、类加载器的分类</h1><h2 id="3-1、概述"><a href="#3-1、概述" class="headerlink" title="3.1、概述"></a>3.1、概述</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405193156149.png" alt="image-20210405193156149"> </p>
+<p>下图中，最上边的是引导类加载器，下边的扩展类加载器和系统类（应用程序类）加载器都是自定义加载器</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405193519650.png" alt="image-20210405193519650"> </p>
+<p>这里面的四者的关系是包含的关系，并不是上下层的关系，也不是子父类继承的关系</p>
+<p>对于用户自定义类来说：默认使用的是系统类加载器</p>
+<p>String类使用的是引导类加载器进行加载。 Java的核心类库都是使用的引导类加载器进行加载的</p>
+<p>引导类加载器是在程序中获取不到的（输出null），就因为它只用来加载核心类库，我们写的代码鸟都不鸟</p>
+<p>下图是相关的程序实例：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405195942291.png" alt="image-20210405195942291"> </p>
+<h2 id="3-2、虚拟机自带的加载器"><a href="#3-2、虚拟机自带的加载器" class="headerlink" title="3.2、虚拟机自带的加载器"></a>3.2、虚拟机自带的加载器</h2><h3 id="3-2-1、启动类加载器（引导类加载器，BootStrap-ClassLoader）"><a href="#3-2-1、启动类加载器（引导类加载器，BootStrap-ClassLoader）" class="headerlink" title="3.2.1、启动类加载器（引导类加载器，BootStrap ClassLoader）"></a>3.2.1、启动类加载器（引导类加载器，BootStrap ClassLoader）</h3><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405200707333.png" alt="image-20210405200707333"> </p>
+<p>解释”加载拓展类和应用程序类加载器“：由上面的知识可知，拓展类加载器和应用程序类加载器是一个对象，这个对象就要对应着一个类就需要加载，这个类属于核心类库，所以也需要使用引导类加载器进行加载</p>
+<h3 id="3-2-2、拓展类加载器（Extension-ClassLoader）"><a href="#3-2-2、拓展类加载器（Extension-ClassLoader）" class="headerlink" title="3.2.2、拓展类加载器（Extension ClassLoader）"></a>3.2.2、拓展类加载器（Extension ClassLoader）</h3><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405201820866.png" alt="image-20210405201820866"> </p>
+<p>由第一条知：$符号是内部类的意思</p>
+<p>注：这里的父类加载器不是Java中的继承关系，是指这个类是由哪个加载器加载进内存的</p>
+<h3 id="3-2-3、应用程序类加载器（系统类加载器，App-ClassLoader）"><a href="#3-2-3、应用程序类加载器（系统类加载器，App-ClassLoader）" class="headerlink" title="3.2.3、应用程序类加载器（系统类加载器，App ClassLoader）"></a>3.2.3、应用程序类加载器（系统类加载器，App ClassLoader）</h3><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405202750163.png" alt="image-20210405202750163"> </p>
+<p>有人说，这里的父类加载器可以改成上级加载器，意思是由上一层加载器加载；周志明书里说，类加载器之间的关系不是是靠继承关系实现的，而是靠组合关系实现的</p>
+<p>相关程序示例：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405204232060.png" alt="image-20210405204232060"> </p>
+<p>运行结果：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405204319220.png" alt="image-20210405204319220"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405204354540.png" alt="image-20210405204354540"> </p>
+<h3 id="3-2-4、用户自定义类加载器（User-Defined-Class-Loader）"><a href="#3-2-4、用户自定义类加载器（User-Defined-Class-Loader）" class="headerlink" title="3.2.4、用户自定义类加载器（User Defined Class Loader）"></a>3.2.4、用户自定义类加载器（User Defined Class Loader）</h3><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405204904397.png" alt="image-20210405204904397"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405214114012.png" alt="image-20210405214114012"> </p>
+<h1 id="4、ClassLoader的使用说明"><a href="#4、ClassLoader的使用说明" class="headerlink" title="4、ClassLoader的使用说明"></a>4、ClassLoader的使用说明</h1><p>ClassLoader类，是一个抽象类，其后所有的类加载器都继承自ClassLoader（不包括启动类加载器）</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405214547995.png" alt="image-20210405214547995"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405214731940.png" alt="image-20210405214731940"> </p>
+<p>获取ClassLoader的途径</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405214818091.png" alt="image-20210405214818091"> </p>
+<h1 id="5、双亲委派机制（重要）"><a href="#5、双亲委派机制（重要）" class="headerlink" title="5、双亲委派机制（重要）"></a>5、双亲委派机制（重要）</h1><p>Java虚拟机对class文件采用的是<strong>按需加载</strong>的方式，也就是说，当需要使用该类的时候才会将它的class为见加载到内存生成class对象。而且加载某个类的class文件时，Java虚拟机采用的是<strong>双亲委派模式</strong>，即把请求交由父类处理，他是一种任务委派模式。有人用通俗语言解释这个模式：<strong>我爸是李刚，有事找我爸</strong>。</p>
+<p><strong>工作原理</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405220047876.png" alt="image-20210405220047876"> </p>
+<p>注：这里不是继承。</p>
+<p><strong>举例1</strong>：孙子、父亲、爷爷，互相让苹果</p>
+<p><strong>举例2</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405221552015.png" alt="image-20210405221552015"> </p>
+<p><strong>优势</strong>：</p>
+<blockquote>
+<p>1、避免类的重复加载</p>
+<p>2、保护程序安全，防止核心API被随意篡改。例如，自定义类java.lang.String、自定义类java.lang.Sxll</p>
+</blockquote>
+<p><strong>沙箱安全机制：</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405221653866.png" alt="image-20210405221653866"> </p>
+<h1 id="6、其他"><a href="#6、其他" class="headerlink" title="6、其他"></a>6、其他</h1><p>补充内容1：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405221927547.png" alt="image-20210405221927547"> </p>
+<p>补充内容2：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405222123517.png" alt="image-20210405222123517"> </p>
+<p>类的主动使用和被动使用：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/02_%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/image-20210405222305101.png" alt="image-20210405222305101"> </p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>07_本地方法栈</title>
     <url>/2021/04/15/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/</url>
-    <content><![CDATA[<span id="more"></span>
-<p><strong>相关概念</strong>： </p>
+    <content><![CDATA[<p><strong>相关概念</strong>： </p>
+<span id="more"></span>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094130147.png" alt="image-20210409094130147"> </p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409095052762.png" alt="image-20210409095052762"> </p>
 <p><strong>举例</strong>：</p>
@@ -402,7 +402,8 @@
   <entry>
     <title>06_本地方法接口</title>
     <url>/2021/04/15/06_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<p><strong>概念</strong>：</p>
+<span id="more"></span>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/06_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E4%B8%AD.jpg" alt="第02章_JVM架构-中"></p>
 <p><strong>什么是本地方法</strong>？</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/06_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3/image-20210409092111986.png" alt="image-20210409092111986"> </p>
@@ -423,10 +424,45 @@
       </tags>
   </entry>
   <entry>
+    <title>10_对象的实例化、内存布局与访问定位</title>
+    <url>/2021/04/15/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="1、对象的实例化"><a href="#1、对象的实例化" class="headerlink" title="1、对象的实例化"></a>1、对象的实例化</h1><span id="more"></span>
+<p><strong>大厂面试题</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413212638125.png" alt="image-20210413212638125"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96.jpg" alt="第10章_对象的实例化"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413215220856.png" alt="image-20210413215220856"> </p>
+<p><strong>创建对象的步骤</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413213949625.png" alt="image-20210413213949625"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214010537.png" alt="image-20210413214010537"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214030953.png" alt="image-20210413214030953"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214046736.png" alt="image-20210413214046736"> </p>
+<h1 id="2、对象的内存布局"><a href="#2、对象的内存布局" class="headerlink" title="2、对象的内存布局"></a>2、对象的内存布局</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_内存布局"> </p>
+<p><strong>示例程序</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220434208.png" alt="image-20210413220434208"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220441975.png" alt="image-20210413220441975"> </p>
+<p><strong>内存布局的图示</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%9B%BE%E7%A4%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_图示对象的内存布局"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_对象的内存布局"> </p>
+<h1 id="3、对象的访问定位"><a href="#3、对象的访问定位" class="headerlink" title="3、对象的访问定位"></a>3、对象的访问定位</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D.jpg" alt="第10章_对象访问定位"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220742842.png" alt="image-20210413220742842"> </p>
+<p><strong>句柄访问</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E6%96%B9%E5%BC%8F1%EF%BC%9A%E5%8F%A5%E6%9F%84%E8%AE%BF%E9%97%AE.jpg" alt="第10章_方式1：句柄访问"> </p>
+<p><strong>直接指针</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E6%96%B9%E5%BC%8F2%EF%BC%9A%E4%BD%BF%E7%94%A8%E7%9B%B4%E6%8E%A5%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE.jpg" alt="第10章_方式2：使用直接指针访问"> </p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>08_堆</title>
     <url>/2021/04/15/08_%E5%A0%86/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、堆的核心概念"><a href="#1、堆的核心概念" class="headerlink" title="1、堆的核心概念"></a>1、堆的核心概念</h1><h2 id="1-1、基本概念"><a href="#1-1、基本概念" class="headerlink" title="1.1、基本概念"></a>1.1、基本概念</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411091825935.png" alt="image-20210411091825935"> </p>
+    <content><![CDATA[<h1 id="1、堆的核心概念"><a href="#1、堆的核心概念" class="headerlink" title="1、堆的核心概念"></a>1、堆的核心概念</h1><span id="more"></span>
+<h2 id="1-1、基本概念"><a href="#1-1、基本概念" class="headerlink" title="1.1、基本概念"></a>1.1、基本概念</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411091825935.png" alt="image-20210411091825935"> </p>
 <p><strong>一个java程序对应一个进程，一个进程就对应着一个JVM的实例，一个JVM实例中只有一个运行时数据区，里面只有一个方法区和一个堆，有多个线程共享同一个堆和方法区，每个线程都各自拥有一份程序计数器、本地方法栈和虚拟机栈</strong>。</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411093005467.png" alt="image-20210411093005467"> </p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411092900764.png" alt="image-20210411092900764"> </p>
@@ -537,8 +573,8 @@
   <entry>
     <title>09_方法区</title>
     <url>/2021/04/15/09_%E6%96%B9%E6%B3%95%E5%8C%BA/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、栈、堆、方法区的交互关系"><a href="#1、栈、堆、方法区的交互关系" class="headerlink" title="1、栈、堆、方法区的交互关系"></a>1、栈、堆、方法区的交互关系</h1><p><strong>运行时数据区结构图</strong>：</p>
+    <content><![CDATA[<h1 id="1、栈、堆、方法区的交互关系"><a href="#1、栈、堆、方法区的交互关系" class="headerlink" title="1、栈、堆、方法区的交互关系"></a>1、栈、堆、方法区的交互关系</h1><span id="more"></span>
+<p><strong>运行时数据区结构图</strong>：</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/09_%E6%96%B9%E6%B3%95%E5%8C%BA/image-20210412155210227.png" alt="image-20210412155210227"> </p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/09_%E6%96%B9%E6%B3%95%E5%8C%BA/image-20210412155332427.png" alt="image-20210412155332427"> </p>
 <p><strong>举例</strong>：</p>
@@ -651,45 +687,10 @@
       </tags>
   </entry>
   <entry>
-    <title>10_对象的实例化、内存布局与访问定位</title>
-    <url>/2021/04/15/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、对象的实例化"><a href="#1、对象的实例化" class="headerlink" title="1、对象的实例化"></a>1、对象的实例化</h1><p><strong>大厂面试题</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413212638125.png" alt="image-20210413212638125"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96.jpg" alt="第10章_对象的实例化"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413215220856.png" alt="image-20210413215220856"> </p>
-<p><strong>创建对象的步骤</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413213949625.png" alt="image-20210413213949625"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214010537.png" alt="image-20210413214010537"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214030953.png" alt="image-20210413214030953"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214046736.png" alt="image-20210413214046736"> </p>
-<h1 id="2、对象的内存布局"><a href="#2、对象的内存布局" class="headerlink" title="2、对象的内存布局"></a>2、对象的内存布局</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_内存布局"> </p>
-<p><strong>示例程序</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220434208.png" alt="image-20210413220434208"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220441975.png" alt="image-20210413220441975"> </p>
-<p><strong>内存布局的图示</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%9B%BE%E7%A4%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_图示对象的内存布局"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_对象的内存布局"> </p>
-<h1 id="3、对象的访问定位"><a href="#3、对象的访问定位" class="headerlink" title="3、对象的访问定位"></a>3、对象的访问定位</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D.jpg" alt="第10章_对象访问定位"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220742842.png" alt="image-20210413220742842"> </p>
-<p><strong>句柄访问</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E6%96%B9%E5%BC%8F1%EF%BC%9A%E5%8F%A5%E6%9F%84%E8%AE%BF%E9%97%AE.jpg" alt="第10章_方式1：句柄访问"> </p>
-<p><strong>直接指针</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E6%96%B9%E5%BC%8F2%EF%BC%9A%E4%BD%BF%E7%94%A8%E7%9B%B4%E6%8E%A5%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE.jpg" alt="第10章_方式2：使用直接指针访问"> </p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>11_直接内存</title>
     <url>/2021/04/15/11_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/</url>
-    <content><![CDATA[<span id="more"></span>
-<p><strong>概述</strong>：</p>
+    <content><![CDATA[<p><strong>概述</strong>：</p>
+<span id="more"></span>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/11_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/image-20210414092706540.png" alt="image-20210414092706540"> </p>
 <p><strong>访问直接内存速度比Java堆快</strong>：</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/11_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/image-20210414093343472.png" alt="image-20210414093343472"> </p>
@@ -707,88 +708,10 @@
       </tags>
   </entry>
   <entry>
-    <title>13_StringTable</title>
-    <url>/2021/04/15/13_StringTable/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、String的基本特性"><a href="#1、String的基本特性" class="headerlink" title="1、String的基本特性"></a>1、String的基本特性</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205555416.png" alt="image-20210414205555416"> </p>
-<p><strong>String在jdk9中存储结构的变更</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205128591.png" alt="image-20210414205128591"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205508647.png" alt="image-20210414205508647"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205625671.png" alt="image-20210414205625671"> </p>
-<p><strong>不可变性的例子</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210449413.png" alt="image-20210414210449413"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210402094.png" alt="image-20210414210402094"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210642147.png" alt="image-20210414210642147"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210857653.png" alt="image-20210414210857653"> </p>
-<p><strong>字符串常量池中是不会存储相同内容的字符串的</strong></p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414211528933.png" alt="image-20210414211528933"> </p>
-<h1 id="2、String的内存分配"><a href="#2、String的内存分配" class="headerlink" title="2、String的内存分配"></a>2、String的内存分配</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212021292.png" alt="image-20210414212021292"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212151636.png" alt="image-20210414212151636"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212847906.png" alt="image-20210414212847906"> </p>
-<h1 id="3、String的基本操作"><a href="#3、String的基本操作" class="headerlink" title="3、String的基本操作"></a>3、String的基本操作</h1><p><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=121&spm_id_from=pageDriver">示例讲解视频</a>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414213253267.png" alt="image-20210414213253267"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414213313474.png" alt="image-20210414213313474"> </p>
-<h1 id="4、字符串拼接操作"><a href="#4、字符串拼接操作" class="headerlink" title="4、字符串拼接操作"></a>4、字符串拼接操作</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415145420503.png" alt="image-20210415145420503"> </p>
-<p><strong>常量与常量，编译期优化</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415145919253.png" alt="image-20210415145919253"> </p>
-<p><strong>比较练习</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415150227463.png" alt="image-20210415150227463"> </p>
-<p><strong>带变量的拼接</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415151718885.png" alt="image-20210415151718885"> </p>
-<p><strong>final的量</strong>：</p>
-<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415152241067.png" alt="image-20210415152241067"> </p>
-<p>反编译之后的</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415151841218.png" alt="image-20210415151841218"> </p>
-<p><strong>练习</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415152727395.png" alt="image-20210415152727395"> </p>
-<p><strong>总结</strong>：</p>
-<blockquote>
-<p>体会执行效率：通过StringBuilder的append()方法添加字符串的效率要远高于使用String的字符串拼接方式！！！</p>
-<p>详情：一、StringBuilder的append方式：自始至终只创建一个StringBuilder的对象；使用String字符串拼接方式：创建了多个StringBuilder的对象</p>
-<p>​    二：使用String的字符串拼接方式：内存中由于创建了较多的StringBuilder和String的对象，内存占用过大；如果进行GC，需要花费额外的时间。</p>
-<p>改进空间：在实际开发中，如果基本确定要前前后后添加的字符串长度不高于某个限定值highlevel的情况下，建议使用构造器：</p>
-<p><code>StringBuilder s = new StringBuilder(highlevel);//new char[highlevel]</code></p>
-</blockquote>
-<h1 id="5、intern-的使用"><a href="#5、intern-的使用" class="headerlink" title="5、intern()的使用"></a>5、intern()的使用</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415160955279.png" alt="image-20210415160955279"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415161020527.png" alt="image-20210415161020527"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415161521145.png" alt="image-20210415161521145"> </p>
-<p><strong><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=126">面试题目：new String(“ab”)会创建几个对象？</a></strong>.</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415162851543.png" alt="image-20210415162851543"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164100605.png" alt="image-20210415164100605"> </p>
-<p><strong>注：new String(“ab”)会创建两个对象是因为使用字面量创建了对象”ab”，是使用字面量导致了常量池中有了这个对象；当使用数组构造String对象的时候，自然就没有加入常量池的操作了</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415163508262.png" alt="image-20210415163508262"> </p>
-<p><strong>注：StringBuilder的toString方法，在返回的String对象中的值是直接将Stringbuider拼接完char型数组的value值付给他，并不是在常量池中的</strong>。</p>
-<p><strong>面试难题：</strong></p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415165238887.png" alt="image-20210415165238887"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164537919.png" alt="image-20210415164537919"> </p>
-<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164604309.png" alt="image-20210415164604309"> </p>
-<p><strong>关于intern的总结</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415193942372.png" alt="image-20210415193942372"> </p>
-<p><strong>练习1</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415194956161.png" alt="image-20210415194956161"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415194909778.png" alt="image-20210415194909778"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415195448033.png" alt="image-20210415195448033"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415195947989.png" alt="image-20210415195947989"> </p>
-<p><strong>结论：对于程序中大量存在的字符串，尤其是存在很多重复的字符串时，使用intern()可以节省内存空间</strong></p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415201753917.png" alt="image-20210415201753917"> </p>
-<h1 id="6、StringTable的垃圾回收"><a href="#6、StringTable的垃圾回收" class="headerlink" title="6、StringTable的垃圾回收"></a>6、StringTable的垃圾回收</h1><h1 id="7、G1中的String去重操作"><a href="#7、G1中的String去重操作" class="headerlink" title="7、G1中的String去重操作"></a>7、G1中的String去重操作</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202152902.png" alt="image-20210415202152902"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202400719.png" alt="image-20210415202400719"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202650950.png" alt="image-20210415202650950"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202747919.png" alt="image-20210415202747919"> </p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>12_执行引擎</title>
     <url>/2021/04/15/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="1、执行引擎概述"><a href="#1、执行引擎概述" class="headerlink" title="1、执行引擎概述"></a>1、执行引擎概述</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414102042869.png" alt="image-20210414102042869"> </p>
+    <content><![CDATA[<h1 id="1、执行引擎概述"><a href="#1、执行引擎概述" class="headerlink" title="1、执行引擎概述"></a>1、执行引擎概述</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414102042869.png" alt="image-20210414102042869"> </p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414101959189.png" alt="image-20210414101959189"> </p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414150714268.png" alt="image-20210414150714268"> </p>
 <p>举例：</p>
@@ -880,6 +803,90 @@
       </tags>
   </entry>
   <entry>
+    <title>asd</title>
+    <url>/2021/02/23/asd/</url>
+    <content><![CDATA[<p>今天是来测试crlf和lf转换的</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>13_StringTable</title>
+    <url>/2021/04/15/13_StringTable/</url>
+    <content><![CDATA[<h1 id="1、String的基本特性"><a href="#1、String的基本特性" class="headerlink" title="1、String的基本特性"></a>1、String的基本特性</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205555416.png" alt="image-20210414205555416"> </p>
+<p><strong>String在jdk9中存储结构的变更</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205128591.png" alt="image-20210414205128591"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205508647.png" alt="image-20210414205508647"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205625671.png" alt="image-20210414205625671"> </p>
+<p><strong>不可变性的例子</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210449413.png" alt="image-20210414210449413"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210402094.png" alt="image-20210414210402094"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210642147.png" alt="image-20210414210642147"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210857653.png" alt="image-20210414210857653"> </p>
+<p><strong>字符串常量池中是不会存储相同内容的字符串的</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414211528933.png" alt="image-20210414211528933"> </p>
+<h1 id="2、String的内存分配"><a href="#2、String的内存分配" class="headerlink" title="2、String的内存分配"></a>2、String的内存分配</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212021292.png" alt="image-20210414212021292"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212151636.png" alt="image-20210414212151636"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212847906.png" alt="image-20210414212847906"> </p>
+<h1 id="3、String的基本操作"><a href="#3、String的基本操作" class="headerlink" title="3、String的基本操作"></a>3、String的基本操作</h1><p><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=121&spm_id_from=pageDriver">示例讲解视频</a>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414213253267.png" alt="image-20210414213253267"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414213313474.png" alt="image-20210414213313474"> </p>
+<h1 id="4、字符串拼接操作"><a href="#4、字符串拼接操作" class="headerlink" title="4、字符串拼接操作"></a>4、字符串拼接操作</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415145420503.png" alt="image-20210415145420503"> </p>
+<p><strong>常量与常量，编译期优化</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415145919253.png" alt="image-20210415145919253"> </p>
+<p><strong>比较练习</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415150227463.png" alt="image-20210415150227463"> </p>
+<p><strong>带变量的拼接</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415151718885.png" alt="image-20210415151718885"> </p>
+<p><strong>final的量</strong>：</p>
+<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415152241067.png" alt="image-20210415152241067"> </p>
+<p>反编译之后的</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415151841218.png" alt="image-20210415151841218"> </p>
+<p><strong>练习</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415152727395.png" alt="image-20210415152727395"> </p>
+<p><strong>总结</strong>：</p>
+<blockquote>
+<p>体会执行效率：通过StringBuilder的append()方法添加字符串的效率要远高于使用String的字符串拼接方式！！！</p>
+<p>详情：一、StringBuilder的append方式：自始至终只创建一个StringBuilder的对象；使用String字符串拼接方式：创建了多个StringBuilder的对象</p>
+<p>​    二：使用String的字符串拼接方式：内存中由于创建了较多的StringBuilder和String的对象，内存占用过大；如果进行GC，需要花费额外的时间。</p>
+<p>改进空间：在实际开发中，如果基本确定要前前后后添加的字符串长度不高于某个限定值highlevel的情况下，建议使用构造器：</p>
+<p><code>StringBuilder s = new StringBuilder(highlevel);//new char[highlevel]</code></p>
+</blockquote>
+<h1 id="5、intern-的使用"><a href="#5、intern-的使用" class="headerlink" title="5、intern()的使用"></a>5、intern()的使用</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415160955279.png" alt="image-20210415160955279"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415161020527.png" alt="image-20210415161020527"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415161521145.png" alt="image-20210415161521145"> </p>
+<p><strong><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=126">面试题目：new String(“ab”)会创建几个对象？</a></strong>.</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415162851543.png" alt="image-20210415162851543"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164100605.png" alt="image-20210415164100605"> </p>
+<p><strong>注：new String(“ab”)会创建两个对象是因为使用字面量创建了对象”ab”，是使用字面量导致了常量池中有了这个对象；当使用数组构造String对象的时候，自然就没有加入常量池的操作了</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415163508262.png" alt="image-20210415163508262"> </p>
+<p><strong>注：StringBuilder的toString方法，在返回的String对象中的值是直接将Stringbuider拼接完char型数组的value值付给他，并不是在常量池中的</strong>。</p>
+<p><strong>面试难题：</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415165238887.png" alt="image-20210415165238887"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164537919.png" alt="image-20210415164537919"> </p>
+<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164604309.png" alt="image-20210415164604309"> </p>
+<p><strong>关于intern的总结</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415193942372.png" alt="image-20210415193942372"> </p>
+<p><strong>练习1</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415194956161.png" alt="image-20210415194956161"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415194909778.png" alt="image-20210415194909778"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415195448033.png" alt="image-20210415195448033"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415195947989.png" alt="image-20210415195947989"> </p>
+<p><strong>结论：对于程序中大量存在的字符串，尤其是存在很多重复的字符串时，使用intern()可以节省内存空间</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415201753917.png" alt="image-20210415201753917"> </p>
+<h1 id="6、StringTable的垃圾回收"><a href="#6、StringTable的垃圾回收" class="headerlink" title="6、StringTable的垃圾回收"></a>6、StringTable的垃圾回收</h1><h1 id="7、G1中的String去重操作"><a href="#7、G1中的String去重操作" class="headerlink" title="7、G1中的String去重操作"></a>7、G1中的String去重操作</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202152902.png" alt="image-20210415202152902"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202400719.png" alt="image-20210415202400719"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202650950.png" alt="image-20210415202650950"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202747919.png" alt="image-20210415202747919"> </p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/02/25/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -898,12 +905,6 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>asd</title>
-    <url>/2021/02/23/asd/</url>
-    <content><![CDATA[<p>今天是来测试crlf和lf转换的</p>
 ]]></content>
   </entry>
   <entry>
