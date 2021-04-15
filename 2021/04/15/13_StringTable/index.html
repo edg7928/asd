@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"edg7928.gitee.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":"enable","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1、String的基本特性  String在jdk9中存储结构的变更：       不可变性的例子：         字符串常量池中是不会存储相同内容的字符串的   2、String的内存分配      3、String的基本操作示例讲解视频：     4、字符串拼接操作  常量与常量，编译期优化：   比较练习：   带变量的拼接：   final的量：    反编译之后的   练习：   总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="子小孙">
+<meta property="og:url" content="httpss://edg7928.gitee.io/2021/04/15/13_StringTable/index.html">
+<meta property="og:site_name" content="子小孙">
+<meta property="og:description" content="1、String的基本特性  String在jdk9中存储结构的变更：       不可变性的例子：         字符串常量池中是不会存储相同内容的字符串的   2、String的内存分配      3、String的基本操作示例讲解视频：     4、字符串拼接操作  常量与常量，编译期优化：   比较练习：   带变量的拼接：   final的量：    反编译之后的   练习：   总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414205555416.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414205128591.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414205508647.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414205625671.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414210449413.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414210402094.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414210642147.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414210857653.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414211528933.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414212021292.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414212151636.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414212847906.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414213253267.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210414213313474.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415145420503.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415145919253.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415150227463.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415151718885.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415152241067.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415151841218.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415152727395.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415160955279.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415161020527.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415161521145.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415162851543.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415164100605.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415163508262.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415165238887.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415164537919.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415164604309.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415193942372.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415194956161.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415194909778.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415195448033.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415195947989.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415201753917.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415202152902.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415202400719.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415202650950.png">
+<meta property="og:image" content="httpss:///2021/04/15/13_StringTable/image-20210415202747919.png">
+<meta property="article:published_time" content="2021-04-15T12:35:10.807Z">
+<meta property="article:modified_time" content="2021-04-15T12:38:53.880Z">
+<meta property="article:author" content="sxll">
+<meta property="article:tag" content="简洁 高效">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="httpss:///2021/04/15/13_StringTable/image-20210414205555416.png">
+
+<link rel="canonical" href="httpss://edg7928.gitee.io/2021/04/15/13_StringTable/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | 子小孙</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">子小孙</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="httpss://edg7928.gitee.io/2021/04/15/13_StringTable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/smallgirl.gif">
+      <meta itemprop="name" content="sxll">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子小孙">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-15 20:35:10 / 修改时间：20:38:53" itemprop="dateCreated datePublished" datetime="2021-04-15T20:35:10+08:00">2021-04-15</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>838</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1、String的基本特性"><a href="#1、String的基本特性" class="headerlink" title="1、String的基本特性"></a>1、String的基本特性</h1><p><img src="/2021/04/15/13_StringTable/image-20210414205555416.png" alt="image-20210414205555416"> </p>
+<p><strong>String在jdk9中存储结构的变更</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414205128591.png" alt="image-20210414205128591"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414205508647.png" alt="image-20210414205508647"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414205625671.png" alt="image-20210414205625671"> </p>
+<p><strong>不可变性的例子</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414210449413.png" alt="image-20210414210449413"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414210402094.png" alt="image-20210414210402094"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414210642147.png" alt="image-20210414210642147"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414210857653.png" alt="image-20210414210857653"> </p>
+<p><strong>字符串常量池中是不会存储相同内容的字符串的</strong></p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414211528933.png" alt="image-20210414211528933"> </p>
+<h1 id="2、String的内存分配"><a href="#2、String的内存分配" class="headerlink" title="2、String的内存分配"></a>2、String的内存分配</h1><p><img src="/2021/04/15/13_StringTable/image-20210414212021292.png" alt="image-20210414212021292"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414212151636.png" alt="image-20210414212151636"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414212847906.png" alt="image-20210414212847906"> </p>
+<h1 id="3、String的基本操作"><a href="#3、String的基本操作" class="headerlink" title="3、String的基本操作"></a>3、String的基本操作</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=121&spm_id_from=pageDriver">示例讲解视频</a>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414213253267.png" alt="image-20210414213253267"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210414213313474.png" alt="image-20210414213313474"> </p>
+<h1 id="4、字符串拼接操作"><a href="#4、字符串拼接操作" class="headerlink" title="4、字符串拼接操作"></a>4、字符串拼接操作</h1><p><img src="/2021/04/15/13_StringTable/image-20210415145420503.png" alt="image-20210415145420503"> </p>
+<p><strong>常量与常量，编译期优化</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415145919253.png" alt="image-20210415145919253"> </p>
+<p><strong>比较练习</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415150227463.png" alt="image-20210415150227463"> </p>
+<p><strong>带变量的拼接</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415151718885.png" alt="image-20210415151718885"> </p>
+<p><strong>final的量</strong>：</p>
+<p> <img src="/2021/04/15/13_StringTable/image-20210415152241067.png" alt="image-20210415152241067"> </p>
+<p>反编译之后的</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415151841218.png" alt="image-20210415151841218"> </p>
+<p><strong>练习</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415152727395.png" alt="image-20210415152727395"> </p>
+<p><strong>总结</strong>：</p>
+<blockquote>
+<p>体会执行效率：通过StringBuilder的append()方法添加字符串的效率要远高于使用String的字符串拼接方式！！！</p>
+<p>详情：一、StringBuilder的append方式：自始至终只创建一个StringBuilder的对象；使用String字符串拼接方式：创建了多个StringBuilder的对象</p>
+<p>​    二：使用String的字符串拼接方式：内存中由于创建了较多的StringBuilder和String的对象，内存占用过大；如果进行GC，需要花费额外的时间。</p>
+<p>改进空间：在实际开发中，如果基本确定要前前后后添加的字符串长度不高于某个限定值highlevel的情况下，建议使用构造器：</p>
+<p><code>StringBuilder s = new StringBuilder(highlevel);//new char[highlevel]</code></p>
+</blockquote>
+<h1 id="5、intern-的使用"><a href="#5、intern-的使用" class="headerlink" title="5、intern()的使用"></a>5、intern()的使用</h1><p><img src="/2021/04/15/13_StringTable/image-20210415160955279.png" alt="image-20210415160955279"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415161020527.png" alt="image-20210415161020527"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415161521145.png" alt="image-20210415161521145"> </p>
+<p><strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=126">面试题目：new String(“ab”)会创建几个对象？</a></strong>.</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415162851543.png" alt="image-20210415162851543"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415164100605.png" alt="image-20210415164100605"> </p>
+<p><strong>注：new String(“ab”)会创建两个对象是因为使用字面量创建了对象”ab”，是使用字面量导致了常量池中有了这个对象；当使用数组构造String对象的时候，自然就没有加入常量池的操作了</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415163508262.png" alt="image-20210415163508262"> </p>
+<p><strong>注：StringBuilder的toString方法，在返回的String对象中的值是直接将Stringbuider拼接完char型数组的value值付给他，并不是在常量池中的</strong>。</p>
+<p><strong>面试难题：</strong></p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415165238887.png" alt="image-20210415165238887"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415164537919.png" alt="image-20210415164537919"> </p>
+<p> <img src="/2021/04/15/13_StringTable/image-20210415164604309.png" alt="image-20210415164604309"> </p>
+<p><strong>关于intern的总结</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415193942372.png" alt="image-20210415193942372"> </p>
+<p><strong>练习1</strong>：</p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415194956161.png" alt="image-20210415194956161"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415194909778.png" alt="image-20210415194909778"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415195448033.png" alt="image-20210415195448033"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415195947989.png" alt="image-20210415195947989"> </p>
+<p><strong>结论：对于程序中大量存在的字符串，尤其是存在很多重复的字符串时，使用intern()可以节省内存空间</strong></p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415201753917.png" alt="image-20210415201753917"> </p>
+<h1 id="6、StringTable的垃圾回收"><a href="#6、StringTable的垃圾回收" class="headerlink" title="6、StringTable的垃圾回收"></a>6、StringTable的垃圾回收</h1><h1 id="7、G1中的String去重操作"><a href="#7、G1中的String去重操作" class="headerlink" title="7、G1中的String去重操作"></a>7、G1中的String去重操作</h1><p><img src="/2021/04/15/13_StringTable/image-20210415202152902.png" alt="image-20210415202152902"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415202400719.png" alt="image-20210415202400719"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415202650950.png" alt="image-20210415202650950"> </p>
+<p><img src="/2021/04/15/13_StringTable/image-20210415202747919.png" alt="image-20210415202747919"> </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/15/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/15/01_JVM%E4%B8%8EJava%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81String%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">1、String的基本特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81String%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">2.</span> <span class="nav-text">2、String的内存分配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81String%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">3、String的基本操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">4、字符串拼接操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81intern-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">5、intern()的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6%E3%80%81StringTable%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">6.</span> <span class="nav-text">6、StringTable的垃圾回收</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7%E3%80%81G1%E4%B8%AD%E7%9A%84String%E5%8E%BB%E9%87%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">7、G1中的String去重操作</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sxll"
+      src="/images/smallgirl.gif">
+  <p class="site-author-name" itemprop="name">sxll</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/edg7928" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;edg7928" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sxll</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">71k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:05</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
