@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>httpss://edg7928.gitee.io/2021/04/15/01_JVM与Java体系结构/</loc>
+    
+    <lastmod>2021-04-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/2021/04/15/02_类加载子系统/</loc>
+    
+    <lastmod>2021-04-15</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>httpss://edg7928.gitee.io/2021/04/15/06_本地方法接口/</loc>
     
     <lastmod>2021-04-15</lastmod>
@@ -73,20 +87,6 @@
   
   <url>
     <loc>httpss://edg7928.gitee.io/2021/04/15/03_运行时数据区概述及线程/</loc>
-    
-    <lastmod>2021-04-15</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>httpss://edg7928.gitee.io/2021/04/15/01_JVM与Java体系结构/</loc>
-    
-    <lastmod>2021-04-15</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>httpss://edg7928.gitee.io/2021/04/15/02_类加载子系统/</loc>
     
     <lastmod>2021-04-15</lastmod>
     
