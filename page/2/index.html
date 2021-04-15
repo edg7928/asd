@@ -214,7 +214,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/15/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2021/04/15/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/" class="post-title-link" itemprop="url">05_虚拟机栈</a>
         </h2>
 
         <div class="post-meta">
@@ -225,7 +225,20 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-15 20:35:10 / 修改时间：20:38:53" itemprop="dateCreated datePublished" datetime="2021-04-15T20:35:10+08:00">2021-04-15</time>
+              <time title="创建时间：2021-04-15 20:35:10 / 修改时间：21:12:18" itemprop="dateCreated datePublished" datetime="2021-04-15T20:35:10+08:00">2021-04-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8EGC/" itemprop="url" rel="index"><span itemprop="name">上篇：内存与GC</span></a>
+                </span>
             </span>
 
           <br>
@@ -253,24 +266,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1、虚拟机栈概述"><a href="#1、虚拟机栈概述" class="headerlink" title="1、虚拟机栈概述"></a>1、虚拟机栈概述</h1><h2 id="1-1、虚拟机出现的背景"><a href="#1-1、虚拟机出现的背景" class="headerlink" title="1.1、虚拟机出现的背景"></a>1.1、虚拟机出现的背景</h2><p><img src="/2021/04/15/05_虚拟机栈/image-20210407150650677.png" alt="image-20210407150650677"> </p>
-<h2 id="1-2、初步印象"><a href="#1-2、初步印象" class="headerlink" title="1.2、初步印象"></a>1.2、初步印象</h2><p><img src="/2021/04/15/05_虚拟机栈/image-20210407150826400.png" alt="image-20210407150826400"> </p>
+          <span id="more"></span>
+<h1 id="1、虚拟机栈概述"><a href="#1、虚拟机栈概述" class="headerlink" title="1、虚拟机栈概述"></a>1、虚拟机栈概述</h1><h2 id="1-1、虚拟机出现的背景"><a href="#1-1、虚拟机出现的背景" class="headerlink" title="1.1、虚拟机出现的背景"></a>1.1、虚拟机出现的背景</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407150650677.png" alt="image-20210407150650677"> </p>
+<h2 id="1-2、初步印象"><a href="#1-2、初步印象" class="headerlink" title="1.2、初步印象"></a>1.2、初步印象</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407150826400.png" alt="image-20210407150826400"> </p>
 <p>注：这样的理解是狭义的，不全面的。C++的内存结构主体上就是栈和堆，可能受其影响。实际上Java的划分更加的细致。</p>
-<h2 id="1-3、内存中的栈和堆"><a href="#1-3、内存中的栈和堆" class="headerlink" title="1.3、内存中的栈和堆"></a>1.3、内存中的栈和堆</h2><p><img src="/2021/04/15/05_虚拟机栈/image-20210407151244600.png" alt="image-20210407151244600"> </p>
+<h2 id="1-3、内存中的栈和堆"><a href="#1-3、内存中的栈和堆" class="headerlink" title="1.3、内存中的栈和堆"></a>1.3、内存中的栈和堆</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407151244600.png" alt="image-20210407151244600"> </p>
 <p>注：对象主要在堆中放，也不是所有的数据都放在堆中。比如方法内的局部变量（基本数据类型，如果是引用数据类型，栈空间知识存放了对象的引用）就放在栈中。</p>
-<h2 id="1-4、举例说明"><a href="#1-4、举例说明" class="headerlink" title="1.4、举例说明"></a>1.4、举例说明</h2><p><img src="/2021/04/15/05_虚拟机栈/image-20210407151751805.png" alt="image-20210407151751805"> </p>
+<h2 id="1-4、举例说明"><a href="#1-4、举例说明" class="headerlink" title="1.4、举例说明"></a>1.4、举例说明</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407151751805.png" alt="image-20210407151751805"> </p>
 <p>注：左边理解为栈，右边理解为堆。有一个直观的认识就行了。左边的上边看成是局部变量表，左边的下边看成是操作数栈（表达式栈）</p>
-<h2 id="1-5、虚拟机的基本内容"><a href="#1-5、虚拟机的基本内容" class="headerlink" title="1.5、虚拟机的基本内容"></a>1.5、虚拟机的基本内容</h2><p><img src="/2021/04/15/05_虚拟机栈/image-20210407153845256.png" alt="image-20210407153845256"> </p>
+<h2 id="1-5、虚拟机的基本内容"><a href="#1-5、虚拟机的基本内容" class="headerlink" title="1.5、虚拟机的基本内容"></a>1.5、虚拟机的基本内容</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407153845256.png" alt="image-20210407153845256"> </p>
 <p><strong>示意图</strong>：</p>
-<p><img src="/2021/04/15/05_虚拟机栈/image-20210407154118966.png" alt="image-20210407154118966"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407154118966.png" alt="image-20210407154118966"> </p>
 <p>注：我们将栈顶的元素称为当前方法</p>
 <p><strong>栈的特点（优点）</strong>：</p>
-<p><img src="/2021/04/15/05_虚拟机栈/image-20210407154353365.png" alt="image-20210407154353365"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407154353365.png" alt="image-20210407154353365"> </p>
 <p>注：栈虽然不需要垃圾回收，但是可能会存在栈溢出或者内存溢出的情况</p>
 <p><strong>面试：开发中你遇见过的异常有哪些？</strong></p>
-<p><img src="/2021/04/15/05_虚拟机栈/image-20210407155009454.png" alt="image-20210407155009454"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407155009454.png" alt="image-20210407155009454"> </p>
 <p><strong>设置栈的内存大小</strong>：</p>
-<p><img src="/2021/04/15/05_虚拟机栈/image-20210407155716662.png" alt="image-20210407155716662"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/image-20210407155716662.png" alt="image-20210407155716662"> </p>
 <h1 id="2、栈的存储单位"><a href="#2、栈的存储单位" class="headerlink" title="2、栈的存储单位"></a>2、栈的存储单位</h1><h2 id="2-1栈中存储了什么？"><a href="#2-1栈中存储了什么？" class="headerlink" title="2.1栈中存储了什么？"></a>2.1栈中存储了什么？</h2><p><img src="/2021/04/15/05_虚拟机栈/image-20210407161329070.png" alt="image-20210407161329070"> </p>
 <p>注：方法和栈帧是一一对应的关系，一个方法的执行，对应着一个栈帧的入栈；一个方法的结束，对应的栈帧就会出栈。栈帧中存放的数据就是方法执行所需要的内容。</p>
 <p><strong>复习</strong>：OOP（面向对象编程）的基本单位是类和对象，类中的基本结构：field（属性、字段、域）、method</p>
@@ -408,7 +422,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/15/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2021/04/15/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">04_程序计数器（PC寄存器）</a>
         </h2>
 
         <div class="post-meta">
@@ -419,7 +433,20 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-15 20:35:10 / 修改时间：20:38:53" itemprop="dateCreated datePublished" datetime="2021-04-15T20:35:10+08:00">2021-04-15</time>
+              <time title="创建时间：2021-04-15 20:35:10 / 修改时间：21:12:28" itemprop="dateCreated datePublished" datetime="2021-04-15T20:35:10+08:00">2021-04-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8EGC/" itemprop="url" rel="index"><span itemprop="name">上篇：内存与GC</span></a>
+                </span>
             </span>
 
           <br>
@@ -447,23 +474,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1、PC-Register介绍"><a href="#1、PC-Register介绍" class="headerlink" title="1、PC Register介绍"></a>1、PC Register介绍</h1><p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406212158867.png" alt="image-20210406212158867"> </p>
+          <span id="more"></span>
+<h1 id="1、PC-Register介绍"><a href="#1、PC-Register介绍" class="headerlink" title="1、PC Register介绍"></a>1、PC Register介绍</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212158867.png" alt="image-20210406212158867"> </p>
 <p><strong>作用</strong>：</p>
-<p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406212426121.png" alt="image-20210406212426121"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212426121.png" alt="image-20210406212426121"> </p>
 <p><strong>介绍</strong>：</p>
-<p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406214038007.png" alt="image-20210406214038007"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214038007.png" alt="image-20210406214038007"> </p>
 <p>这最后一条的意思是，JVM的PC寄存器是Java层面的内容，native是调用的本地方法，所以是不显示的未指定值。</p>
-<p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406214841462.png" alt="image-20210406214841462"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214841462.png" alt="image-20210406214841462"> </p>
 <p>注：虚拟机栈不考虑垃圾回收，堆和方法区是由垃圾回收的；PC寄存器也不会内存溢出，其他的部分都有可能。</p>
-<h1 id="2、举例说明"><a href="#2、举例说明" class="headerlink" title="2、举例说明"></a>2、举例说明</h1><p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406215703126.png" alt="image-20210406215703126"> </p>
+<h1 id="2、举例说明"><a href="#2、举例说明" class="headerlink" title="2、举例说明"></a>2、举例说明</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406215703126.png" alt="image-20210406215703126"> </p>
 <p>左边的数字是指令地址（或者叫偏移地址），这就是PC寄存器中存储的内容；右边的内容可以理解为操作指令</p>
-<p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406220603758.png" alt="image-20210406220603758"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220603758.png" alt="image-20210406220603758"> </p>
 <p>执行引擎从PC寄存器中存储的地址找到对应的指令，然后进行了转换为机器指令和操作局部变量表、操作数栈这两步骤。</p>
-<h1 id="3、两个常见问题"><a href="#3、两个常见问题" class="headerlink" title="3、两个常见问题"></a>3、两个常见问题</h1><h2 id="3-1、第一个问题"><a href="#3-1、第一个问题" class="headerlink" title="3.1、第一个问题"></a>3.1、第一个问题</h2><p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406220852415.png" alt="image-20210406220852415"> </p>
-<p><img src="/2021/04/15/04_程序计数器（PC寄存器）/%E7%AC%AC04%E7%AB%A0_PC%E5%AF%84%E5%AD%98%E5%99%A8.jpg" alt="第04章_PC寄存器"> </p>
-<h2 id="3-2、第二个问题"><a href="#3-2、第二个问题" class="headerlink" title="3.2、第二个问题"></a>3.2、第二个问题</h2><p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406221159909.png" alt="image-20210406221159909"> </p>
+<h1 id="3、两个常见问题"><a href="#3、两个常见问题" class="headerlink" title="3、两个常见问题"></a>3、两个常见问题</h1><h2 id="3-1、第一个问题"><a href="#3-1、第一个问题" class="headerlink" title="3.1、第一个问题"></a>3.1、第一个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220852415.png" alt="image-20210406220852415"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/%E7%AC%AC04%E7%AB%A0_PC%E5%AF%84%E5%AD%98%E5%99%A8.jpg" alt="第04章_PC寄存器"> </p>
+<h2 id="3-2、第二个问题"><a href="#3-2、第二个问题" class="headerlink" title="3.2、第二个问题"></a>3.2、第二个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221159909.png" alt="image-20210406221159909"> </p>
 <p><strong>CPU时间片</strong>：</p>
-<p><img src="/2021/04/15/04_程序计数器（PC寄存器）/image-20210406221557214.png" alt="image-20210406221557214"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221557214.png" alt="image-20210406221557214"> </p>
 <p>并行：某个时间段所有时间内一起执行。</p>
 <p>vs 串行：某个时间段内，挨着一个个排队来执行。</p>
 <p>并发：某个时间段内一起执行，由于切换速度很快，所以看成是并行，但是在某个时间点只有一个在执行。</p>
@@ -501,7 +529,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/15/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2021/04/15/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">03_运行时数据区概述及线程</a>
         </h2>
 
         <div class="post-meta">
@@ -512,7 +540,20 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-15 20:35:10 / 修改时间：20:38:53" itemprop="dateCreated datePublished" datetime="2021-04-15T20:35:10+08:00">2021-04-15</time>
+              <time title="创建时间：2021-04-15 20:35:10 / 修改时间：21:08:23" itemprop="dateCreated datePublished" datetime="2021-04-15T20:35:10+08:00">2021-04-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8EGC/" itemprop="url" rel="index"><span itemprop="name">上篇：内存与GC</span></a>
+                </span>
             </span>
 
           <br>
@@ -540,25 +581,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><h2 id="1-1、从这一节开始，就要进行运行时数据区的讲解"><a href="#1-1、从这一节开始，就要进行运行时数据区的讲解" class="headerlink" title="1.1、从这一节开始，就要进行运行时数据区的讲解"></a>1.1、从这一节开始，就要进行运行时数据区的讲解</h2><p><img src="/2021/04/15/03_运行时数据区概述及线程/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E7%AE%80%E5%9B%BE.jpg" alt="第02章_JVM架构-简图"> </p>
+          <span id="more"></span>
+<h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><h2 id="1-1、从这一节开始，就要进行运行时数据区的讲解"><a href="#1-1、从这一节开始，就要进行运行时数据区的讲解" class="headerlink" title="1.1、从这一节开始，就要进行运行时数据区的讲解"></a>1.1、从这一节开始，就要进行运行时数据区的讲解</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/%E7%AC%AC02%E7%AB%A0_JVM%E6%9E%B6%E6%9E%84-%E7%AE%80%E5%9B%BE.jpg" alt="第02章_JVM架构-简图"> </p>
 <p>下图是引入运行时数据区，“？”部分就是接下来的重点</p>
-<p><img src="/2021/04/15/03_运行时数据区概述及线程/%E7%AC%AC03%E7%AB%A0_%E5%BC%95%E5%85%A5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA.jpg" alt="第03章_引入运行时数据区"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/%E7%AC%AC03%E7%AB%A0_%E5%BC%95%E5%85%A5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA.jpg" alt="第03章_引入运行时数据区"> </p>
 <p>有趣的举例（康师傅真牛逼）</p>
-<p><img src="/2021/04/15/03_运行时数据区概述及线程/image-20210406202232005.png" alt="image-20210406202232005"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/image-20210406202232005.png" alt="image-20210406202232005"> </p>
 <p>注解：后边桌子上摆的各种食材和各种刀具，可以看成时<strong>运行时数据区</strong>。厨师就可以看成是我们的<strong>执行引擎</strong>，利用运行时数据区进行一系列的操作，最后清理垃圾（运行时数据区的）</p>
 <h2 id="1-2、内存的介绍"><a href="#1-2、内存的介绍" class="headerlink" title="1.2、内存的介绍"></a>1.2、内存的介绍</h2><p>内存时一种非常重要的系统资源，是硬盘和 CPU的 中间仓库及桥梁，承载着操作系统和应用程序的实时运行。JVM内存布局规定了Java在运行的过程中的内存申请、分配、管理的策略，保证了JVM的高效稳定运行。<strong>不同的JVM对于内存的划分方式和管理机制存在着部分差异</strong>。结合JVM虚拟机规范，来探讨一下经典的JVM内存布局。</p>
-<p><img src="/2021/04/15/03_运行时数据区概述及线程/image-20210406203547414.png" alt="image-20210406203547414"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/image-20210406203547414.png" alt="image-20210406203547414"> </p>
 <p>阿里手册里的一张图：</p>
-<p><img src="/2021/04/15/03_运行时数据区概述及线程/image-20210406203627437.png" alt="image-20210406203627437"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/image-20210406203627437.png" alt="image-20210406203627437"> </p>
 <p>一个虚拟机对应着一个进程，进程里面可以有线程</p>
-<p><img src="/2021/04/15/03_运行时数据区概述及线程/image-20210406204159150.png" alt="image-20210406204159150"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/image-20210406204159150.png" alt="image-20210406204159150"> </p>
 <p>方法去写成了堆外内存，暂时将永久代或者元空间看成是方法区的实现。至于代码缓存算不算是方法区中的，不用纠结，只需要知道代码缓存肯定不是堆空间的内容就行。</p>
 <p>在整个JVM优化过程当中，针对线程里面的东西没有太多优化的问题。垃圾回收的95%的问题集中在堆区，5%集中在方法区。</p>
-<p><img src="/2021/04/15/03_运行时数据区概述及线程/%E7%AC%AC03%E7%AB%A0_%E7%BA%BF%E7%A8%8B%E5%85%B1%E4%BA%AB%E5%92%8C%E7%A7%81%E6%9C%89%E7%9A%84%E7%BB%93%E6%9E%84.jpg" alt="第03章_线程共享和私有的结构"> </p>
-<h2 id="1-3、关于线程间共享的说明"><a href="#1-3、关于线程间共享的说明" class="headerlink" title="1.3、关于线程间共享的说明"></a>1.3、关于线程间共享的说明</h2><p><img src="/2021/04/15/03_运行时数据区概述及线程/image-20210406205329574.png" alt="image-20210406205329574"> </p>
-<h1 id="2、线程"><a href="#2、线程" class="headerlink" title="2、线程"></a>2、线程</h1><p><img src="/2021/04/15/03_运行时数据区概述及线程/image-20210406210036386.png" alt="image-20210406210036386"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/%E7%AC%AC03%E7%AB%A0_%E7%BA%BF%E7%A8%8B%E5%85%B1%E4%BA%AB%E5%92%8C%E7%A7%81%E6%9C%89%E7%9A%84%E7%BB%93%E6%9E%84.jpg" alt="第03章_线程共享和私有的结构"> </p>
+<h2 id="1-3、关于线程间共享的说明"><a href="#1-3、关于线程间共享的说明" class="headerlink" title="1.3、关于线程间共享的说明"></a>1.3、关于线程间共享的说明</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/image-20210406205329574.png" alt="image-20210406205329574"> </p>
+<h1 id="2、线程"><a href="#2、线程" class="headerlink" title="2、线程"></a>2、线程</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/image-20210406210036386.png" alt="image-20210406210036386"> </p>
 <p>JVM系统线程</p>
-<p><img src="/2021/04/15/03_运行时数据区概述及线程/image-20210406210657716.png" alt="image-20210406210657716"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/image-20210406210657716.png" alt="image-20210406210657716"> </p>
 <p>后续在调优的部分还会详细的讲解</p>
 
       
@@ -1011,13 +1053,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
