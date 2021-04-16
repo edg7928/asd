@@ -405,25 +405,6 @@
       </tags>
   </entry>
   <entry>
-    <title>07_本地方法栈</title>
-    <url>/2021/04/15/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/</url>
-    <content><![CDATA[<p><strong>相关概念</strong>： </p>
-<span id="more"></span>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094130147.png" alt="image-20210409094130147"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409095052762.png" alt="image-20210409095052762"> </p>
-<p><strong>举例</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094940990.png" alt="image-20210409094940990"> </p>
-<p>本章之前的内容回顾请看视频<a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=65">P65_JVM学习路线与内容回顾</a></p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>08_堆</title>
     <url>/2021/04/15/08_%E5%A0%86/</url>
     <content><![CDATA[<h1 id="1、堆的核心概念"><a href="#1、堆的核心概念" class="headerlink" title="1、堆的核心概念"></a>1、堆的核心概念</h1><span id="more"></span>
@@ -536,31 +517,15 @@
       </tags>
   </entry>
   <entry>
-    <title>10_对象的实例化、内存布局与访问定位</title>
-    <url>/2021/04/15/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="1、对象的实例化"><a href="#1、对象的实例化" class="headerlink" title="1、对象的实例化"></a>1、对象的实例化</h1><span id="more"></span>
-<p><strong>大厂面试题</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413212638125.png" alt="image-20210413212638125"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96.jpg" alt="第10章_对象的实例化"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413215220856.png" alt="image-20210413215220856"> </p>
-<p><strong>创建对象的步骤</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413213949625.png" alt="image-20210413213949625"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214010537.png" alt="image-20210413214010537"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214030953.png" alt="image-20210413214030953"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214046736.png" alt="image-20210413214046736"> </p>
-<h1 id="2、对象的内存布局"><a href="#2、对象的内存布局" class="headerlink" title="2、对象的内存布局"></a>2、对象的内存布局</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_内存布局"> </p>
-<p><strong>示例程序</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220434208.png" alt="image-20210413220434208"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220441975.png" alt="image-20210413220441975"> </p>
-<p><strong>内存布局的图示</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%9B%BE%E7%A4%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_图示对象的内存布局"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_对象的内存布局"> </p>
-<h1 id="3、对象的访问定位"><a href="#3、对象的访问定位" class="headerlink" title="3、对象的访问定位"></a>3、对象的访问定位</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D.jpg" alt="第10章_对象访问定位"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220742842.png" alt="image-20210413220742842"> </p>
-<p><strong>句柄访问</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E6%96%B9%E5%BC%8F1%EF%BC%9A%E5%8F%A5%E6%9F%84%E8%AE%BF%E9%97%AE.jpg" alt="第10章_方式1：句柄访问"> </p>
-<p><strong>直接指针</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E6%96%B9%E5%BC%8F2%EF%BC%9A%E4%BD%BF%E7%94%A8%E7%9B%B4%E6%8E%A5%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE.jpg" alt="第10章_方式2：使用直接指针访问"> </p>
+    <title>07_本地方法栈</title>
+    <url>/2021/04/15/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/</url>
+    <content><![CDATA[<p><strong>相关概念</strong>： </p>
+<span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094130147.png" alt="image-20210409094130147"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409095052762.png" alt="image-20210409095052762"> </p>
+<p><strong>举例</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094940990.png" alt="image-20210409094940990"> </p>
+<p>本章之前的内容回顾请看视频<a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=65">P65_JVM学习路线与内容回顾</a></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -677,6 +642,41 @@
 <p><strong>常见面试题</strong>：</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/09_%E6%96%B9%E6%B3%95%E5%8C%BA/image-20210413205523930.png" alt="image-20210413205523930"> </p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/09_%E6%96%B9%E6%B3%95%E5%8C%BA/image-20210413205627549.png" alt="image-20210413205627549"> </p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>10_对象的实例化、内存布局与访问定位</title>
+    <url>/2021/04/15/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="1、对象的实例化"><a href="#1、对象的实例化" class="headerlink" title="1、对象的实例化"></a>1、对象的实例化</h1><span id="more"></span>
+<p><strong>大厂面试题</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413212638125.png" alt="image-20210413212638125"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96.jpg" alt="第10章_对象的实例化"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413215220856.png" alt="image-20210413215220856"> </p>
+<p><strong>创建对象的步骤</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413213949625.png" alt="image-20210413213949625"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214010537.png" alt="image-20210413214010537"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214030953.png" alt="image-20210413214030953"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413214046736.png" alt="image-20210413214046736"> </p>
+<h1 id="2、对象的内存布局"><a href="#2、对象的内存布局" class="headerlink" title="2、对象的内存布局"></a>2、对象的内存布局</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_内存布局"> </p>
+<p><strong>示例程序</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220434208.png" alt="image-20210413220434208"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220441975.png" alt="image-20210413220441975"> </p>
+<p><strong>内存布局的图示</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%9B%BE%E7%A4%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_图示对象的内存布局"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.jpg" alt="第10章_对象的内存布局"> </p>
+<h1 id="3、对象的访问定位"><a href="#3、对象的访问定位" class="headerlink" title="3、对象的访问定位"></a>3、对象的访问定位</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E5%AF%B9%E8%B1%A1%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D.jpg" alt="第10章_对象访问定位"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/image-20210413220742842.png" alt="image-20210413220742842"> </p>
+<p><strong>句柄访问</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E6%96%B9%E5%BC%8F1%EF%BC%9A%E5%8F%A5%E6%9F%84%E8%AE%BF%E9%97%AE.jpg" alt="第10章_方式1：句柄访问"> </p>
+<p><strong>直接指针</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/%E7%AC%AC10%E7%AB%A0_%E6%96%B9%E5%BC%8F2%EF%BC%9A%E4%BD%BF%E7%94%A8%E7%9B%B4%E6%8E%A5%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE.jpg" alt="第10章_方式2：使用直接指针访问"> </p>
 ]]></content>
       <categories>
         <category>JVM</category>
