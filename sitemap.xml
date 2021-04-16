@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>httpss://edg7928.gitee.io/2021/04/16/个人博客/</loc>
+    
+    <lastmod>2021-04-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/2021/04/16/SSH的公钥和私钥的相关配置/</loc>
+    
+    <lastmod>2021-04-16</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>httpss://edg7928.gitee.io/2021/02/22/我的第一篇博客/</loc>
     
     <lastmod>2021-04-16</lastmod>
@@ -165,6 +179,13 @@
   </url>
   
   <url>
+    <loc>httpss://edg7928.gitee.io/tags/Hexo博客/</loc>
+    <lastmod>2021-04-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>httpss://edg7928.gitee.io/tags/导航/</loc>
     <lastmod>2021-04-16</lastmod>
     <changefreq>daily</changefreq>
@@ -173,6 +194,13 @@
   
   <url>
     <loc>httpss://edg7928.gitee.io/tags/分享/</loc>
+    <lastmod>2021-04-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/tags/SSH/</loc>
     <lastmod>2021-04-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -209,7 +237,21 @@
   </url>
   
   <url>
+    <loc>httpss://edg7928.gitee.io/categories/Hexo博客/</loc>
+    <lastmod>2021-04-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>httpss://edg7928.gitee.io/categories/前端/</loc>
+    <lastmod>2021-04-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/categories/Hexo博客/初始化/</loc>
     <lastmod>2021-04-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -224,6 +266,13 @@
   
   <url>
     <loc>httpss://edg7928.gitee.io/categories/前端/后端/Java/</loc>
+    <lastmod>2021-04-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/categories/Hexo博客/SSH免密登录/</loc>
     <lastmod>2021-04-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
