@@ -179,6 +179,40 @@
       </tags>
   </entry>
   <entry>
+    <title>04_程序计数器（PC寄存器）</title>
+    <url>/2021/04/15/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="1、PC-Register介绍"><a href="#1、PC-Register介绍" class="headerlink" title="1、PC Register介绍"></a>1、PC Register介绍</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212158867.png" alt="image-20210406212158867"> </p>
+<p><strong>作用</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212426121.png" alt="image-20210406212426121"> </p>
+<p><strong>介绍</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214038007.png" alt="image-20210406214038007"> </p>
+<p>这最后一条的意思是，JVM的PC寄存器是Java层面的内容，native是调用的本地方法，所以是不显示的未指定值。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214841462.png" alt="image-20210406214841462"> </p>
+<p>注：虚拟机栈不考虑垃圾回收，堆和方法区是由垃圾回收的；PC寄存器也不会内存溢出，其他的部分都有可能。</p>
+<h1 id="2、举例说明"><a href="#2、举例说明" class="headerlink" title="2、举例说明"></a>2、举例说明</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406215703126.png" alt="image-20210406215703126"> </p>
+<p>左边的数字是指令地址（或者叫偏移地址），这就是PC寄存器中存储的内容；右边的内容可以理解为操作指令</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220603758.png" alt="image-20210406220603758"> </p>
+<p>执行引擎从PC寄存器中存储的地址找到对应的指令，然后进行了转换为机器指令和操作局部变量表、操作数栈这两步骤。</p>
+<h1 id="3、两个常见问题"><a href="#3、两个常见问题" class="headerlink" title="3、两个常见问题"></a>3、两个常见问题</h1><h2 id="3-1、第一个问题"><a href="#3-1、第一个问题" class="headerlink" title="3.1、第一个问题"></a>3.1、第一个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220852415.png" alt="image-20210406220852415"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/%E7%AC%AC04%E7%AB%A0_PC%E5%AF%84%E5%AD%98%E5%99%A8.jpg" alt="第04章_PC寄存器"> </p>
+<h2 id="3-2、第二个问题"><a href="#3-2、第二个问题" class="headerlink" title="3.2、第二个问题"></a>3.2、第二个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221159909.png" alt="image-20210406221159909"> </p>
+<p><strong>CPU时间片</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221557214.png" alt="image-20210406221557214"> </p>
+<p>并行：某个时间段所有时间内一起执行。</p>
+<p>vs 串行：某个时间段内，挨着一个个排队来执行。</p>
+<p>并发：某个时间段内一起执行，由于切换速度很快，所以看成是并行，但是在某个时间点只有一个在执行。</p>
+<p>先了解一下，后边的垃圾回收还会讲。</p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>05_虚拟机栈</title>
     <url>/2021/04/15/05_%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/</url>
     <content><![CDATA[<h1 id="1、虚拟机栈概述"><a href="#1、虚拟机栈概述" class="headerlink" title="1、虚拟机栈概述"></a>1、虚拟机栈概述</h1><span id="more"></span>
@@ -347,40 +381,6 @@
       </tags>
   </entry>
   <entry>
-    <title>04_程序计数器（PC寄存器）</title>
-    <url>/2021/04/15/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="1、PC-Register介绍"><a href="#1、PC-Register介绍" class="headerlink" title="1、PC Register介绍"></a>1、PC Register介绍</h1><span id="more"></span>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212158867.png" alt="image-20210406212158867"> </p>
-<p><strong>作用</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212426121.png" alt="image-20210406212426121"> </p>
-<p><strong>介绍</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214038007.png" alt="image-20210406214038007"> </p>
-<p>这最后一条的意思是，JVM的PC寄存器是Java层面的内容，native是调用的本地方法，所以是不显示的未指定值。</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214841462.png" alt="image-20210406214841462"> </p>
-<p>注：虚拟机栈不考虑垃圾回收，堆和方法区是由垃圾回收的；PC寄存器也不会内存溢出，其他的部分都有可能。</p>
-<h1 id="2、举例说明"><a href="#2、举例说明" class="headerlink" title="2、举例说明"></a>2、举例说明</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406215703126.png" alt="image-20210406215703126"> </p>
-<p>左边的数字是指令地址（或者叫偏移地址），这就是PC寄存器中存储的内容；右边的内容可以理解为操作指令</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220603758.png" alt="image-20210406220603758"> </p>
-<p>执行引擎从PC寄存器中存储的地址找到对应的指令，然后进行了转换为机器指令和操作局部变量表、操作数栈这两步骤。</p>
-<h1 id="3、两个常见问题"><a href="#3、两个常见问题" class="headerlink" title="3、两个常见问题"></a>3、两个常见问题</h1><h2 id="3-1、第一个问题"><a href="#3-1、第一个问题" class="headerlink" title="3.1、第一个问题"></a>3.1、第一个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220852415.png" alt="image-20210406220852415"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/%E7%AC%AC04%E7%AB%A0_PC%E5%AF%84%E5%AD%98%E5%99%A8.jpg" alt="第04章_PC寄存器"> </p>
-<h2 id="3-2、第二个问题"><a href="#3-2、第二个问题" class="headerlink" title="3.2、第二个问题"></a>3.2、第二个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221159909.png" alt="image-20210406221159909"> </p>
-<p><strong>CPU时间片</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221557214.png" alt="image-20210406221557214"> </p>
-<p>并行：某个时间段所有时间内一起执行。</p>
-<p>vs 串行：某个时间段内，挨着一个个排队来执行。</p>
-<p>并发：某个时间段内一起执行，由于切换速度很快，所以看成是并行，但是在某个时间点只有一个在执行。</p>
-<p>先了解一下，后边的垃圾回收还会讲。</p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>07_本地方法栈</title>
     <url>/2021/04/15/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/</url>
     <content><![CDATA[<p><strong>相关概念</strong>： </p>
@@ -414,6 +414,118 @@
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/06_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3/image-20210409092631545.png" alt="image-20210409092631545"> </p>
 <p><strong>现状</strong>：</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/06_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3/image-20210409093356186.png" alt="image-20210409093356186"> </p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>08_堆</title>
+    <url>/2021/04/15/08_%E5%A0%86/</url>
+    <content><![CDATA[<h1 id="1、堆的核心概念"><a href="#1、堆的核心概念" class="headerlink" title="1、堆的核心概念"></a>1、堆的核心概念</h1><span id="more"></span>
+<h2 id="1-1、基本概念"><a href="#1-1、基本概念" class="headerlink" title="1.1、基本概念"></a>1.1、基本概念</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411091825935.png" alt="image-20210411091825935"> </p>
+<p><strong>一个java程序对应一个进程，一个进程就对应着一个JVM的实例，一个JVM实例中只有一个运行时数据区，里面只有一个方法区和一个堆，有多个线程共享同一个堆和方法区，每个线程都各自拥有一份程序计数器、本地方法栈和虚拟机栈</strong>。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411093005467.png" alt="image-20210411093005467"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411092900764.png" alt="image-20210411092900764"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411094154410.png" alt="image-20210411094154410"> </p>
+<h2 id="1-2、内存细分"><a href="#1-2、内存细分" class="headerlink" title="1.2、内存细分"></a>1.2、内存细分</h2><p><strong>现代垃圾回收器大部分都基于分代收集理论的设计，堆空间细分为</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411095630434.png" alt="image-20210411095630434"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411191433730.png" alt="image-20210411191433730"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411191455563.png" alt="image-20210411191455563"> </p>
+<p>注：逻辑上是存在三部分，实际上在设置堆空间大小时，是不包括元空间或永久区的</p>
+<p>JDK8中内存结构有哪些变化，其中之一就是永久代变成了元空间</p>
+<h1 id="2、设置堆内存大小与OOM"><a href="#2、设置堆内存大小与OOM" class="headerlink" title="2、设置堆内存大小与OOM"></a>2、设置堆内存大小与OOM</h1><h2 id="2-1、设置堆空间大小"><a href="#2-1、设置堆空间大小" class="headerlink" title="2.1、设置堆空间大小"></a>2.1、设置堆空间大小</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411100825064.png" alt="image-20210411100825064"> </p>
+<p>注：<code>-Xms</code>：用来设置堆空间（年轻代 + 老年代）的初始内存大小。其中<code>-X</code>是<code>JVM</code>的运行参数；<code>ms</code>是memory start。</p>
+<p><code>-Xms</code>：用来设置堆空间（年轻代 + 老年代）的最大内存大小。</p>
+<p>如何查看设置的参数：方式一： <code>jps / jstat -gc 进程id</code>；**方式二：<code>-XX:PrintGCDetails</code>**。</p>
+<h2 id="2-2、OOM（OutOfMemoryError）举例"><a href="#2-2、OOM（OutOfMemoryError）举例" class="headerlink" title="2.2、OOM（OutOfMemoryError）举例"></a>2.2、OOM（OutOfMemoryError）举例</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411183913199.png" alt="image-20210411183913199"> </p>
+<p>注：Class Throwable有两个子类Error和Exception，这是狭义上的异常，广义上的异常，指的开发中遇到的凡是程序不正常的情况</p>
+<h1 id="3、年轻代和老年代"><a href="#3、年轻代和老年代" class="headerlink" title="3、年轻代和老年代"></a>3、年轻代和老年代</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411184739512.png" alt="image-20210411184739512"> </p>
+<p>注：堆中存储的东西现在Eden中，过了一段时间没有消亡，就转到survivor中，再过一会还是没有消亡，就会进入老年代。</p>
+<p>图示：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411190410591.png" alt="image-20210411190410591"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411185410113.png" alt="image-20210411185410113"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411185827832.png" alt="image-20210411185827832"> </p>
+<p>注：<code>-XX:UseAdaptiveSizePolicy</code>是用来关闭自适应的内存分配策略</p>
+<p>如果<code>-Xmn</code>和<code>NewRatio</code>冲突的话，以<code>-Xmn</code>为准。（一般会不设置）</p>
+<h1 id="4、图解对象分配过程"><a href="#4、图解对象分配过程" class="headerlink" title="4、图解对象分配过程"></a>4、图解对象分配过程</h1><h2 id="4-1、一般过程"><a href="#4-1、一般过程" class="headerlink" title="4.1、一般过程"></a>4.1、一般过程</h2><p><strong>概述</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411191547334.png" alt="image-20210411191547334"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411191702038.png" alt="image-20210411191702038"> </p>
+<p>注：Eden区满的时候会触发YGC/Minor GC，但是survivor区满的时候不会触发；当Eden区满的时候，会将Eden区和Survivor区一起回收。有的对象刚创建就在老年区了，还有的age没有达到15，也进入了老年代。</p>
+<p><strong>图解</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/%E7%AC%AC08%E7%AB%A0_%E6%96%B0%E7%94%9F%E4%BB%A3%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B.jpg" alt="第08章_新生代对象分配与回收过程"> </p>
+<p><strong>总结</strong>：</p>
+<blockquote>
+<p>1、针对幸存者s0，s1的总结：复制之后有交换，谁空谁是to</p>
+<p>2、关于垃圾回收：频繁在新生代收集，很少在老年代收集，几乎不再永久代/元空间收集。</p>
+</blockquote>
+<h2 id="4-2、特殊情况"><a href="#4-2、特殊情况" class="headerlink" title="4.2、特殊情况"></a>4.2、特殊情况</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411200223566.png" alt="image-20210411200223566"> </p>
+<p>注：YGC之后，Eden区一定是空的。</p>
+<h2 id="4-3、代码示例"><a href="#4-3、代码示例" class="headerlink" title="4.3、代码示例"></a>4.3、代码示例</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411201134973.png" alt="image-20210411201134973"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411201415645.png" alt="image-20210411201415645"> </p>
+<h2 id="4-4、常用的调优工具"><a href="#4-4、常用的调优工具" class="headerlink" title="4.4、常用的调优工具"></a>4.4、常用的调优工具</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411202512138.png" alt="image-20210411202512138"> </p>
+<h1 id="5、Minor-GC、Major-GC、Full-GC"><a href="#5、Minor-GC、Major-GC、Full-GC" class="headerlink" title="5、Minor GC、Major GC、Full GC"></a>5、Minor GC、Major GC、Full GC</h1><h2 id="5-1、三类GC的区别"><a href="#5-1、三类GC的区别" class="headerlink" title="5.1、三类GC的区别"></a>5.1、三类GC的区别</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411203112140.png" alt="image-20210411203112140"> </p>
+<p>注：所谓调优，就是希望垃圾回收的次数少一些。Major GC和Full GC的时间比Minor GC长很多，主要是让他们回收的次数少一些。而且Major GC和Full GC的区分很重要。</p>
+<h2 id="5-2、最简单的分代式GC策略的触发条件"><a href="#5-2、最简单的分代式GC策略的触发条件" class="headerlink" title="5.2、最简单的分代式GC策略的触发条件"></a>5.2、最简单的分代式GC策略的触发条件</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411204902770.png" alt="image-20210411204902770"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411205142708.png" alt="image-20210411205142708"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411205241652.png" alt="image-20210411205241652"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411205439930.png" alt="image-20210411205439930"> </p>
+<h1 id="6、堆空间的分代思想"><a href="#6、堆空间的分代思想" class="headerlink" title="6、堆空间的分代思想"></a>6、堆空间的分代思想</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411211524073.png" alt="image-20210411211524073"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411211618889.png" alt="image-20210411211618889"> </p>
+<h1 id="7、内存分配策略（或对象提升（Promotion）规则）"><a href="#7、内存分配策略（或对象提升（Promotion）规则）" class="headerlink" title="7、内存分配策略（或对象提升（Promotion）规则）"></a>7、内存分配策略（或对象提升（Promotion）规则）</h1><p><strong>一般原则</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411212133633.png" alt="image-20210411212133633"> </p>
+<p><strong>特殊情况</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411212218809.png" alt="image-20210411212218809"> </p>
+<h1 id="8、为对象分配内存：TLAB"><a href="#8、为对象分配内存：TLAB" class="headerlink" title="8、为对象分配内存：TLAB"></a>8、为对象分配内存：TLAB</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411213253889.png" alt="image-20210411213253889"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411213415969.png" alt="image-20210411213415969"> </p>
+<p><strong>图示</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411213533152.png" alt="image-20210411213533152"> </p>
+<p><strong>TLAB再说明</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411213715897.png" alt="image-20210411213715897"> </p>
+<p>注：TLAB默认是开启状态。</p>
+<p><strong>对象分配过程：TLAB</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411214200826.png" alt="image-20210411214200826"> </p>
+<h1 id="9、小结：堆的参数设置"><a href="#9、小结：堆的参数设置" class="headerlink" title="9、小结：堆的参数设置"></a>9、小结：堆的参数设置</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411214723927.png" alt="image-20210411214723927"> </p>
+<p>注：具体查看某个参数的指令：1、jps：用来查看当前运行的进程号；2、jinfo -flag 某参数名 进程id</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411215043630.png" alt="image-20210411215043630"> </p>
+<p><strong>空间分配担保</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411220702977.png" alt="image-20210411220702977"> </p>
+<h1 id="X、堆是分配对象的唯一选择吗？不是"><a href="#X、堆是分配对象的唯一选择吗？不是" class="headerlink" title="X、堆是分配对象的唯一选择吗？不是"></a>X、堆是分配对象的唯一选择吗？不是</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411221533744.png" alt="image-20210411221533744"> </p>
+<h2 id="X-1、逃逸分析"><a href="#X-1、逃逸分析" class="headerlink" title="X.1、逃逸分析"></a>X.1、逃逸分析</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411223743896.png" alt="image-20210411223743896"> </p>
+<p><strong>举例1</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224036862.png" alt="image-20210411224036862"> </p>
+<p><strong>举例2</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224109462.png" alt="image-20210411224109462"> </p>
+<p><strong>举例3</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224232302.png" alt="image-20210411224232302"> </p>
+<p><strong>如何快速判断是否发生了逃逸分析</strong>？大家就看new的<strong>对象实体</strong>是否在方法外被调用。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224531709.png" alt="image-20210411224531709"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224630021.png" alt="image-20210411224630021"> </p>
+<p>上图最后一项，对象实体不是方法中的，是在方法外。</p>
+<p><strong>只要没有发生逃逸，就可以考虑栈上分配</strong>。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411225024309.png" alt="image-20210411225024309"> </p>
+<p><strong>结论：开发中能够使用局部变量的，就不要使用方法外定义</strong>。</p>
+<h2 id="X-2、逃逸分析：代码优化"><a href="#X-2、逃逸分析：代码优化" class="headerlink" title="X.2、逃逸分析：代码优化"></a>X.2、逃逸分析：代码优化</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412090818021.png" alt="image-20210412090818021"> </p>
+<p><strong>栈上分配</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412091130630.png" alt="image-20210412091130630"> </p>
+<p>注：没有发生逃逸的就可以进行栈上分配。</p>
+<p><strong>同步省略</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412092025429.png" alt="image-20210412092025429"> </p>
+<p>注：如果锁对象没有逃逸，就可以进行锁消除。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412092216518.png" alt="image-20210412092216518"> </p>
+<p><strong>标量替换或分离对象</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412093620746.png" alt="image-20210412093620746"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412093930576.png" alt="image-20210412093930576"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412094208888.png" alt="image-20210412094208888"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412094852000.png" alt="image-20210412094852000"> </p>
+<h2 id="X-3、逃逸分析小结：逃逸分析还不是很成熟"><a href="#X-3、逃逸分析小结：逃逸分析还不是很成熟" class="headerlink" title="X.3、逃逸分析小结：逃逸分析还不是很成熟"></a>X.3、逃逸分析小结：逃逸分析还不是很成熟</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412095059089.png" alt="image-20210412095059089"> </p>
+<p><strong>注</strong>：Oracle Hotspot VM中并未应用栈上分配，是用的标量替换而产生的同样的效果。所以栈上没有存对象，对象还是存在堆里。栈上是存的标量，并不是对象。</p>
+<p><strong>以上是目前的理解，之后看书啥的可能还会变</strong>。</p>
+<h1 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412095521608.png" alt="image-20210412095521608"> </p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -540,118 +652,6 @@
       </tags>
   </entry>
   <entry>
-    <title>08_堆</title>
-    <url>/2021/04/15/08_%E5%A0%86/</url>
-    <content><![CDATA[<h1 id="1、堆的核心概念"><a href="#1、堆的核心概念" class="headerlink" title="1、堆的核心概念"></a>1、堆的核心概念</h1><span id="more"></span>
-<h2 id="1-1、基本概念"><a href="#1-1、基本概念" class="headerlink" title="1.1、基本概念"></a>1.1、基本概念</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411091825935.png" alt="image-20210411091825935"> </p>
-<p><strong>一个java程序对应一个进程，一个进程就对应着一个JVM的实例，一个JVM实例中只有一个运行时数据区，里面只有一个方法区和一个堆，有多个线程共享同一个堆和方法区，每个线程都各自拥有一份程序计数器、本地方法栈和虚拟机栈</strong>。</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411093005467.png" alt="image-20210411093005467"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411092900764.png" alt="image-20210411092900764"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411094154410.png" alt="image-20210411094154410"> </p>
-<h2 id="1-2、内存细分"><a href="#1-2、内存细分" class="headerlink" title="1.2、内存细分"></a>1.2、内存细分</h2><p><strong>现代垃圾回收器大部分都基于分代收集理论的设计，堆空间细分为</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411095630434.png" alt="image-20210411095630434"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411191433730.png" alt="image-20210411191433730"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411191455563.png" alt="image-20210411191455563"> </p>
-<p>注：逻辑上是存在三部分，实际上在设置堆空间大小时，是不包括元空间或永久区的</p>
-<p>JDK8中内存结构有哪些变化，其中之一就是永久代变成了元空间</p>
-<h1 id="2、设置堆内存大小与OOM"><a href="#2、设置堆内存大小与OOM" class="headerlink" title="2、设置堆内存大小与OOM"></a>2、设置堆内存大小与OOM</h1><h2 id="2-1、设置堆空间大小"><a href="#2-1、设置堆空间大小" class="headerlink" title="2.1、设置堆空间大小"></a>2.1、设置堆空间大小</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411100825064.png" alt="image-20210411100825064"> </p>
-<p>注：<code>-Xms</code>：用来设置堆空间（年轻代 + 老年代）的初始内存大小。其中<code>-X</code>是<code>JVM</code>的运行参数；<code>ms</code>是memory start。</p>
-<p><code>-Xms</code>：用来设置堆空间（年轻代 + 老年代）的最大内存大小。</p>
-<p>如何查看设置的参数：方式一： <code>jps / jstat -gc 进程id</code>；**方式二：<code>-XX:PrintGCDetails</code>**。</p>
-<h2 id="2-2、OOM（OutOfMemoryError）举例"><a href="#2-2、OOM（OutOfMemoryError）举例" class="headerlink" title="2.2、OOM（OutOfMemoryError）举例"></a>2.2、OOM（OutOfMemoryError）举例</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411183913199.png" alt="image-20210411183913199"> </p>
-<p>注：Class Throwable有两个子类Error和Exception，这是狭义上的异常，广义上的异常，指的开发中遇到的凡是程序不正常的情况</p>
-<h1 id="3、年轻代和老年代"><a href="#3、年轻代和老年代" class="headerlink" title="3、年轻代和老年代"></a>3、年轻代和老年代</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411184739512.png" alt="image-20210411184739512"> </p>
-<p>注：堆中存储的东西现在Eden中，过了一段时间没有消亡，就转到survivor中，再过一会还是没有消亡，就会进入老年代。</p>
-<p>图示：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411190410591.png" alt="image-20210411190410591"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411185410113.png" alt="image-20210411185410113"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411185827832.png" alt="image-20210411185827832"> </p>
-<p>注：<code>-XX:UseAdaptiveSizePolicy</code>是用来关闭自适应的内存分配策略</p>
-<p>如果<code>-Xmn</code>和<code>NewRatio</code>冲突的话，以<code>-Xmn</code>为准。（一般会不设置）</p>
-<h1 id="4、图解对象分配过程"><a href="#4、图解对象分配过程" class="headerlink" title="4、图解对象分配过程"></a>4、图解对象分配过程</h1><h2 id="4-1、一般过程"><a href="#4-1、一般过程" class="headerlink" title="4.1、一般过程"></a>4.1、一般过程</h2><p><strong>概述</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411191547334.png" alt="image-20210411191547334"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411191702038.png" alt="image-20210411191702038"> </p>
-<p>注：Eden区满的时候会触发YGC/Minor GC，但是survivor区满的时候不会触发；当Eden区满的时候，会将Eden区和Survivor区一起回收。有的对象刚创建就在老年区了，还有的age没有达到15，也进入了老年代。</p>
-<p><strong>图解</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/%E7%AC%AC08%E7%AB%A0_%E6%96%B0%E7%94%9F%E4%BB%A3%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B.jpg" alt="第08章_新生代对象分配与回收过程"> </p>
-<p><strong>总结</strong>：</p>
-<blockquote>
-<p>1、针对幸存者s0，s1的总结：复制之后有交换，谁空谁是to</p>
-<p>2、关于垃圾回收：频繁在新生代收集，很少在老年代收集，几乎不再永久代/元空间收集。</p>
-</blockquote>
-<h2 id="4-2、特殊情况"><a href="#4-2、特殊情况" class="headerlink" title="4.2、特殊情况"></a>4.2、特殊情况</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411200223566.png" alt="image-20210411200223566"> </p>
-<p>注：YGC之后，Eden区一定是空的。</p>
-<h2 id="4-3、代码示例"><a href="#4-3、代码示例" class="headerlink" title="4.3、代码示例"></a>4.3、代码示例</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411201134973.png" alt="image-20210411201134973"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411201415645.png" alt="image-20210411201415645"> </p>
-<h2 id="4-4、常用的调优工具"><a href="#4-4、常用的调优工具" class="headerlink" title="4.4、常用的调优工具"></a>4.4、常用的调优工具</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411202512138.png" alt="image-20210411202512138"> </p>
-<h1 id="5、Minor-GC、Major-GC、Full-GC"><a href="#5、Minor-GC、Major-GC、Full-GC" class="headerlink" title="5、Minor GC、Major GC、Full GC"></a>5、Minor GC、Major GC、Full GC</h1><h2 id="5-1、三类GC的区别"><a href="#5-1、三类GC的区别" class="headerlink" title="5.1、三类GC的区别"></a>5.1、三类GC的区别</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411203112140.png" alt="image-20210411203112140"> </p>
-<p>注：所谓调优，就是希望垃圾回收的次数少一些。Major GC和Full GC的时间比Minor GC长很多，主要是让他们回收的次数少一些。而且Major GC和Full GC的区分很重要。</p>
-<h2 id="5-2、最简单的分代式GC策略的触发条件"><a href="#5-2、最简单的分代式GC策略的触发条件" class="headerlink" title="5.2、最简单的分代式GC策略的触发条件"></a>5.2、最简单的分代式GC策略的触发条件</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411204902770.png" alt="image-20210411204902770"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411205142708.png" alt="image-20210411205142708"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411205241652.png" alt="image-20210411205241652"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411205439930.png" alt="image-20210411205439930"> </p>
-<h1 id="6、堆空间的分代思想"><a href="#6、堆空间的分代思想" class="headerlink" title="6、堆空间的分代思想"></a>6、堆空间的分代思想</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411211524073.png" alt="image-20210411211524073"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411211618889.png" alt="image-20210411211618889"> </p>
-<h1 id="7、内存分配策略（或对象提升（Promotion）规则）"><a href="#7、内存分配策略（或对象提升（Promotion）规则）" class="headerlink" title="7、内存分配策略（或对象提升（Promotion）规则）"></a>7、内存分配策略（或对象提升（Promotion）规则）</h1><p><strong>一般原则</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411212133633.png" alt="image-20210411212133633"> </p>
-<p><strong>特殊情况</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411212218809.png" alt="image-20210411212218809"> </p>
-<h1 id="8、为对象分配内存：TLAB"><a href="#8、为对象分配内存：TLAB" class="headerlink" title="8、为对象分配内存：TLAB"></a>8、为对象分配内存：TLAB</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411213253889.png" alt="image-20210411213253889"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411213415969.png" alt="image-20210411213415969"> </p>
-<p><strong>图示</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411213533152.png" alt="image-20210411213533152"> </p>
-<p><strong>TLAB再说明</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411213715897.png" alt="image-20210411213715897"> </p>
-<p>注：TLAB默认是开启状态。</p>
-<p><strong>对象分配过程：TLAB</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411214200826.png" alt="image-20210411214200826"> </p>
-<h1 id="9、小结：堆的参数设置"><a href="#9、小结：堆的参数设置" class="headerlink" title="9、小结：堆的参数设置"></a>9、小结：堆的参数设置</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411214723927.png" alt="image-20210411214723927"> </p>
-<p>注：具体查看某个参数的指令：1、jps：用来查看当前运行的进程号；2、jinfo -flag 某参数名 进程id</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411215043630.png" alt="image-20210411215043630"> </p>
-<p><strong>空间分配担保</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411220702977.png" alt="image-20210411220702977"> </p>
-<h1 id="X、堆是分配对象的唯一选择吗？不是"><a href="#X、堆是分配对象的唯一选择吗？不是" class="headerlink" title="X、堆是分配对象的唯一选择吗？不是"></a>X、堆是分配对象的唯一选择吗？不是</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411221533744.png" alt="image-20210411221533744"> </p>
-<h2 id="X-1、逃逸分析"><a href="#X-1、逃逸分析" class="headerlink" title="X.1、逃逸分析"></a>X.1、逃逸分析</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411223743896.png" alt="image-20210411223743896"> </p>
-<p><strong>举例1</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224036862.png" alt="image-20210411224036862"> </p>
-<p><strong>举例2</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224109462.png" alt="image-20210411224109462"> </p>
-<p><strong>举例3</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224232302.png" alt="image-20210411224232302"> </p>
-<p><strong>如何快速判断是否发生了逃逸分析</strong>？大家就看new的<strong>对象实体</strong>是否在方法外被调用。</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224531709.png" alt="image-20210411224531709"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411224630021.png" alt="image-20210411224630021"> </p>
-<p>上图最后一项，对象实体不是方法中的，是在方法外。</p>
-<p><strong>只要没有发生逃逸，就可以考虑栈上分配</strong>。</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210411225024309.png" alt="image-20210411225024309"> </p>
-<p><strong>结论：开发中能够使用局部变量的，就不要使用方法外定义</strong>。</p>
-<h2 id="X-2、逃逸分析：代码优化"><a href="#X-2、逃逸分析：代码优化" class="headerlink" title="X.2、逃逸分析：代码优化"></a>X.2、逃逸分析：代码优化</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412090818021.png" alt="image-20210412090818021"> </p>
-<p><strong>栈上分配</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412091130630.png" alt="image-20210412091130630"> </p>
-<p>注：没有发生逃逸的就可以进行栈上分配。</p>
-<p><strong>同步省略</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412092025429.png" alt="image-20210412092025429"> </p>
-<p>注：如果锁对象没有逃逸，就可以进行锁消除。</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412092216518.png" alt="image-20210412092216518"> </p>
-<p><strong>标量替换或分离对象</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412093620746.png" alt="image-20210412093620746"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412093930576.png" alt="image-20210412093930576"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412094208888.png" alt="image-20210412094208888"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412094852000.png" alt="image-20210412094852000"> </p>
-<h2 id="X-3、逃逸分析小结：逃逸分析还不是很成熟"><a href="#X-3、逃逸分析小结：逃逸分析还不是很成熟" class="headerlink" title="X.3、逃逸分析小结：逃逸分析还不是很成熟"></a>X.3、逃逸分析小结：逃逸分析还不是很成熟</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412095059089.png" alt="image-20210412095059089"> </p>
-<p><strong>注</strong>：Oracle Hotspot VM中并未应用栈上分配，是用的标量替换而产生的同样的效果。所以栈上没有存对象，对象还是存在堆里。栈上是存的标量，并不是对象。</p>
-<p><strong>以上是目前的理解，之后看书啥的可能还会变</strong>。</p>
-<h1 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/08_%E5%A0%86/image-20210412095521608.png" alt="image-20210412095521608"> </p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>10_对象的实例化、内存布局与访问定位</title>
     <url>/2021/04/15/10_%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E3%80%81%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E4%B8%8E%E8%AE%BF%E9%97%AE%E5%AE%9A%E4%BD%8D/</url>
     <content><![CDATA[<h1 id="1、对象的实例化"><a href="#1、对象的实例化" class="headerlink" title="1、对象的实例化"></a>1、对象的实例化</h1><span id="more"></span>
@@ -698,6 +698,84 @@
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/11_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/image-20210414093937848.png" alt="image-20210414093937848"> </p>
 <p>注：Direct buffer memory </p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/11_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/image-20210414100309126.png" alt="image-20210414100309126"> </p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>13_StringTable</title>
+    <url>/2021/04/15/13_StringTable/</url>
+    <content><![CDATA[<h1 id="1、String的基本特性"><a href="#1、String的基本特性" class="headerlink" title="1、String的基本特性"></a>1、String的基本特性</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205555416.png" alt="image-20210414205555416"> </p>
+<p><strong>String在jdk9中存储结构的变更</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205128591.png" alt="image-20210414205128591"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205508647.png" alt="image-20210414205508647"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205625671.png" alt="image-20210414205625671"> </p>
+<p><strong>不可变性的例子</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210449413.png" alt="image-20210414210449413"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210402094.png" alt="image-20210414210402094"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210642147.png" alt="image-20210414210642147"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210857653.png" alt="image-20210414210857653"> </p>
+<p><strong>字符串常量池中是不会存储相同内容的字符串的</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414211528933.png" alt="image-20210414211528933"> </p>
+<h1 id="2、String的内存分配"><a href="#2、String的内存分配" class="headerlink" title="2、String的内存分配"></a>2、String的内存分配</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212021292.png" alt="image-20210414212021292"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212151636.png" alt="image-20210414212151636"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212847906.png" alt="image-20210414212847906"> </p>
+<h1 id="3、String的基本操作"><a href="#3、String的基本操作" class="headerlink" title="3、String的基本操作"></a>3、String的基本操作</h1><p><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=121&spm_id_from=pageDriver">示例讲解视频</a>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414213253267.png" alt="image-20210414213253267"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414213313474.png" alt="image-20210414213313474"> </p>
+<h1 id="4、字符串拼接操作"><a href="#4、字符串拼接操作" class="headerlink" title="4、字符串拼接操作"></a>4、字符串拼接操作</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415145420503.png" alt="image-20210415145420503"> </p>
+<p><strong>常量与常量，编译期优化</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415145919253.png" alt="image-20210415145919253"> </p>
+<p><strong>比较练习</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415150227463.png" alt="image-20210415150227463"> </p>
+<p><strong>带变量的拼接</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415151718885.png" alt="image-20210415151718885"> </p>
+<p><strong>final的量</strong>：</p>
+<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415152241067.png" alt="image-20210415152241067"> </p>
+<p>反编译之后的</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415151841218.png" alt="image-20210415151841218"> </p>
+<p><strong>练习</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415152727395.png" alt="image-20210415152727395"> </p>
+<p><strong>总结</strong>：</p>
+<blockquote>
+<p>体会执行效率：通过StringBuilder的append()方法添加字符串的效率要远高于使用String的字符串拼接方式！！！</p>
+<p>详情：一、StringBuilder的append方式：自始至终只创建一个StringBuilder的对象；使用String字符串拼接方式：创建了多个StringBuilder的对象</p>
+<p>​    二：使用String的字符串拼接方式：内存中由于创建了较多的StringBuilder和String的对象，内存占用过大；如果进行GC，需要花费额外的时间。</p>
+<p>改进空间：在实际开发中，如果基本确定要前前后后添加的字符串长度不高于某个限定值highlevel的情况下，建议使用构造器：</p>
+<p><code>StringBuilder s = new StringBuilder(highlevel);//new char[highlevel]</code></p>
+</blockquote>
+<h1 id="5、intern-的使用"><a href="#5、intern-的使用" class="headerlink" title="5、intern()的使用"></a>5、intern()的使用</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415160955279.png" alt="image-20210415160955279"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415161020527.png" alt="image-20210415161020527"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415161521145.png" alt="image-20210415161521145"> </p>
+<p><strong><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=126">面试题目：new String(“ab”)会创建几个对象？</a></strong>.</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415162851543.png" alt="image-20210415162851543"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164100605.png" alt="image-20210415164100605"> </p>
+<p><strong>注：new String(“ab”)会创建两个对象是因为使用字面量创建了对象”ab”，是使用字面量导致了常量池中有了这个对象；当使用数组构造String对象的时候，自然就没有加入常量池的操作了</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415163508262.png" alt="image-20210415163508262"> </p>
+<p><strong>注：StringBuilder的toString方法，在返回的String对象中的值是直接将Stringbuider拼接完char型数组的value值付给他，并不是在常量池中的</strong>。</p>
+<p><strong>面试难题：</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415165238887.png" alt="image-20210415165238887"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164537919.png" alt="image-20210415164537919"> </p>
+<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164604309.png" alt="image-20210415164604309"> </p>
+<p><strong>关于intern的总结</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415193942372.png" alt="image-20210415193942372"> </p>
+<p><strong>练习1</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415194956161.png" alt="image-20210415194956161"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415194909778.png" alt="image-20210415194909778"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415195448033.png" alt="image-20210415195448033"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415195947989.png" alt="image-20210415195947989"> </p>
+<p><strong>结论：对于程序中大量存在的字符串，尤其是存在很多重复的字符串时，使用intern()可以节省内存空间</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415201753917.png" alt="image-20210415201753917"> </p>
+<h1 id="6、StringTable的垃圾回收"><a href="#6、StringTable的垃圾回收" class="headerlink" title="6、StringTable的垃圾回收"></a>6、StringTable的垃圾回收</h1><h1 id="7、G1中的String去重操作"><a href="#7、G1中的String去重操作" class="headerlink" title="7、G1中的String去重操作"></a>7、G1中的String去重操作</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202152902.png" alt="image-20210415202152902"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202400719.png" alt="image-20210415202400719"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202650950.png" alt="image-20210415202650950"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202747919.png" alt="image-20210415202747919"> </p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -803,84 +881,6 @@
       </tags>
   </entry>
   <entry>
-    <title>13_StringTable</title>
-    <url>/2021/04/15/13_StringTable/</url>
-    <content><![CDATA[<h1 id="1、String的基本特性"><a href="#1、String的基本特性" class="headerlink" title="1、String的基本特性"></a>1、String的基本特性</h1><span id="more"></span>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205555416.png" alt="image-20210414205555416"> </p>
-<p><strong>String在jdk9中存储结构的变更</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205128591.png" alt="image-20210414205128591"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205508647.png" alt="image-20210414205508647"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414205625671.png" alt="image-20210414205625671"> </p>
-<p><strong>不可变性的例子</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210449413.png" alt="image-20210414210449413"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210402094.png" alt="image-20210414210402094"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210642147.png" alt="image-20210414210642147"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414210857653.png" alt="image-20210414210857653"> </p>
-<p><strong>字符串常量池中是不会存储相同内容的字符串的</strong></p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414211528933.png" alt="image-20210414211528933"> </p>
-<h1 id="2、String的内存分配"><a href="#2、String的内存分配" class="headerlink" title="2、String的内存分配"></a>2、String的内存分配</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212021292.png" alt="image-20210414212021292"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212151636.png" alt="image-20210414212151636"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414212847906.png" alt="image-20210414212847906"> </p>
-<h1 id="3、String的基本操作"><a href="#3、String的基本操作" class="headerlink" title="3、String的基本操作"></a>3、String的基本操作</h1><p><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=121&spm_id_from=pageDriver">示例讲解视频</a>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414213253267.png" alt="image-20210414213253267"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210414213313474.png" alt="image-20210414213313474"> </p>
-<h1 id="4、字符串拼接操作"><a href="#4、字符串拼接操作" class="headerlink" title="4、字符串拼接操作"></a>4、字符串拼接操作</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415145420503.png" alt="image-20210415145420503"> </p>
-<p><strong>常量与常量，编译期优化</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415145919253.png" alt="image-20210415145919253"> </p>
-<p><strong>比较练习</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415150227463.png" alt="image-20210415150227463"> </p>
-<p><strong>带变量的拼接</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415151718885.png" alt="image-20210415151718885"> </p>
-<p><strong>final的量</strong>：</p>
-<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415152241067.png" alt="image-20210415152241067"> </p>
-<p>反编译之后的</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415151841218.png" alt="image-20210415151841218"> </p>
-<p><strong>练习</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415152727395.png" alt="image-20210415152727395"> </p>
-<p><strong>总结</strong>：</p>
-<blockquote>
-<p>体会执行效率：通过StringBuilder的append()方法添加字符串的效率要远高于使用String的字符串拼接方式！！！</p>
-<p>详情：一、StringBuilder的append方式：自始至终只创建一个StringBuilder的对象；使用String字符串拼接方式：创建了多个StringBuilder的对象</p>
-<p>​    二：使用String的字符串拼接方式：内存中由于创建了较多的StringBuilder和String的对象，内存占用过大；如果进行GC，需要花费额外的时间。</p>
-<p>改进空间：在实际开发中，如果基本确定要前前后后添加的字符串长度不高于某个限定值highlevel的情况下，建议使用构造器：</p>
-<p><code>StringBuilder s = new StringBuilder(highlevel);//new char[highlevel]</code></p>
-</blockquote>
-<h1 id="5、intern-的使用"><a href="#5、intern-的使用" class="headerlink" title="5、intern()的使用"></a>5、intern()的使用</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415160955279.png" alt="image-20210415160955279"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415161020527.png" alt="image-20210415161020527"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415161521145.png" alt="image-20210415161521145"> </p>
-<p><strong><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=126">面试题目：new String(“ab”)会创建几个对象？</a></strong>.</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415162851543.png" alt="image-20210415162851543"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164100605.png" alt="image-20210415164100605"> </p>
-<p><strong>注：new String(“ab”)会创建两个对象是因为使用字面量创建了对象”ab”，是使用字面量导致了常量池中有了这个对象；当使用数组构造String对象的时候，自然就没有加入常量池的操作了</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415163508262.png" alt="image-20210415163508262"> </p>
-<p><strong>注：StringBuilder的toString方法，在返回的String对象中的值是直接将Stringbuider拼接完char型数组的value值付给他，并不是在常量池中的</strong>。</p>
-<p><strong>面试难题：</strong></p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415165238887.png" alt="image-20210415165238887"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164537919.png" alt="image-20210415164537919"> </p>
-<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415164604309.png" alt="image-20210415164604309"> </p>
-<p><strong>关于intern的总结</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415193942372.png" alt="image-20210415193942372"> </p>
-<p><strong>练习1</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415194956161.png" alt="image-20210415194956161"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415194909778.png" alt="image-20210415194909778"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415195448033.png" alt="image-20210415195448033"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415195947989.png" alt="image-20210415195947989"> </p>
-<p><strong>结论：对于程序中大量存在的字符串，尤其是存在很多重复的字符串时，使用intern()可以节省内存空间</strong></p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415201753917.png" alt="image-20210415201753917"> </p>
-<h1 id="6、StringTable的垃圾回收"><a href="#6、StringTable的垃圾回收" class="headerlink" title="6、StringTable的垃圾回收"></a>6、StringTable的垃圾回收</h1><h1 id="7、G1中的String去重操作"><a href="#7、G1中的String去重操作" class="headerlink" title="7、G1中的String去重操作"></a>7、G1中的String去重操作</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202152902.png" alt="image-20210415202152902"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202400719.png" alt="image-20210415202400719"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202650950.png" alt="image-20210415202650950"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/13_StringTable/image-20210415202747919.png" alt="image-20210415202747919"> </p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>14_垃圾回收概述.md</title>
     <url>/2021/04/16/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/</url>
     <content><![CDATA[<h1 id="1、什么是垃圾？"><a href="#1、什么是垃圾？" class="headerlink" title="1、什么是垃圾？"></a>1、什么是垃圾？</h1><span id="more"></span>
@@ -909,25 +909,85 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/02/25/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <title>15_垃圾回收相关算法</title>
+    <url>/2021/04/18/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p><strong>从面试角度，这一章还是比较重要的</strong>！！！</p>
 <span id="more"></span>
 
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h1 id="1、标记阶段：引用计数算法"><a href="#1、标记阶段：引用计数算法" class="headerlink" title="1、标记阶段：引用计数算法"></a>1、标记阶段：引用计数算法</h1><p><strong>对象存活判断</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417201557710.png" alt="image-20210417201557710"> </p>
+<p><strong>方式一：引用计数算法</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417202127743.png" alt="image-20210417202127743"> </p>
+<p>注：<strong>无法循环引用，Java的GC没有采用这种算法</strong></p>
+<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417202539296.png" alt="image-20210417202539296"> </p>
+<p><strong>举例</strong>：</p>
+<p> <img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417202843631.png" alt="image-20210417202843631"> </p>
+<p><strong>小结</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417203112303.png" alt="image-20210417203112303"> </p>
+<h1 id="2、标记阶段：可达性分析算法"><a href="#2、标记阶段：可达性分析算法" class="headerlink" title="2、标记阶段：可达性分析算法"></a>2、标记阶段：可达性分析算法</h1><p><strong>方式二：可达性分析（或根搜索算法、追踪性垃圾收集）</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417203829110.png" alt="image-20210417203829110"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417203904582.png" alt="image-20210417203904582"> 、</p>
+<p><strong>举例</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417204229614.png" alt="image-20210417204229614"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417204100096.png" alt="image-20210417204100096"> </p>
+<p>注：葡萄、人民的名义关系网</p>
+<p><strong>GC Roots</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417204307991.png" alt="image-20210417204307991"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417204626638.png" alt="image-20210417204626638"> </p>
+<p><strong>“临时性”</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417204708670.png" alt="image-20210417204708670"> </p>
+<p><strong>注意</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417205024127.png" alt="image-20210417205024127"> </p>
+<h1 id="3、对象的finalization机制"><a href="#3、对象的finalization机制" class="headerlink" title="3、对象的finalization机制"></a>3、对象的finalization机制</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417210556133.png" alt="image-20210417210556133"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417210840165.png" alt="image-20210417210840165"> </p>
+<p><strong>生存还是死亡？</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417211211550.png" alt="image-20210417211211550"> </p>
+<p><strong>具体过程</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417212121365.png" alt="image-20210417212121365"> </p>
+<p>注：这个Finalize方法像是一块免死金牌。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210417213026060.png" alt="image-20210417213026060"> </p>
+<h1 id="4、MAT与JProfiler的GC-Roots溯源"><a href="#4、MAT与JProfiler的GC-Roots溯源" class="headerlink" title="4、MAT与JProfiler的GC Roots溯源"></a>4、MAT与JProfiler的GC Roots溯源</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418100130885.png" alt="image-20210418100130885"> </p>
+<p><strong>获取dump文件</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418100521782.png" alt="image-20210418100521782"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418100703901.png" alt="image-20210418100703901"> </p>
+<h1 id="5、清除阶段：标记-清除算法"><a href="#5、清除阶段：标记-清除算法" class="headerlink" title="5、清除阶段：标记-清除算法"></a>5、清除阶段：标记-清除算法</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418103623845.png" alt="image-20210418103623845"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418103740342.png" alt="image-20210418103740342"> </p>
+<p>注：标记的不是垃圾。</p>
+<p><strong>图示</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/%E7%AC%AC14%E7%AB%A0_%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95.jpg" alt="第14章_标记-清除算法"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418104440158.png" alt="image-20210418104440158"> </p>
+<h1 id="6、清除阶段：复制算法"><a href="#6、清除阶段：复制算法" class="headerlink" title="6、清除阶段：复制算法"></a>6、清除阶段：复制算法</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418104825558.png" alt="image-20210418104825558"> </p>
+<p><strong>图示</strong>：</p>
+<p><img src="/2021/04/18/15_垃圾回收相关算法/%E7%AC%AC14%E7%AB%A0_%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95.jpg" alt="第14章_复制算法"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418105204158.png" alt="image-20210418105204158"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418105650967.png" alt="image-20210418105650967"> </p>
+<h1 id="7、清除阶段：标记-压缩算法"><a href="#7、清除阶段：标记-压缩算法" class="headerlink" title="7、清除阶段：标记-压缩算法"></a>7、清除阶段：标记-压缩算法</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418105739470.png" alt="image-20210418105739470"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418105917958.png" alt="image-20210418105917958"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/%E7%AC%AC14%E7%AB%A0_%E6%A0%87%E8%AE%B0-%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95.jpg" alt="第14章_标记-压缩算法"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418111654087.png" alt="image-20210418111654087"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418111854798.png" alt="image-20210418111854798"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418111920575.png" alt="image-20210418111920575"> </p>
+<h1 id="8、小结"><a href="#8、小结" class="headerlink" title="8、小结"></a>8、小结</h1><p><strong>对比三种算法</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418181653720.png" alt="image-20210418181653720">  </p>
+<h1 id="9、分代收集算法"><a href="#9、分代收集算法" class="headerlink" title="9、分代收集算法"></a>9、分代收集算法</h1><p><strong>难道就没有一种最优的算法吗？答：没有最优的算法，只有最合适的算法。</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418182049316.png" alt="image-20210418182049316"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418182216450.png" alt="image-20210418182216450"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418182612553.png" alt="image-20210418182612553"> </p>
+<h1 id="X、增量收集算法、分区算法"><a href="#X、增量收集算法、分区算法" class="headerlink" title="X、增量收集算法、分区算法"></a>X、增量收集算法、分区算法</h1><p><strong>增量收集算法</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418183118225.png" alt="image-20210418183118225"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418183448450.png" alt="image-20210418183448450"> </p>
+<p><strong>分区算法</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/image-20210418183725865.png" alt="image-20210418183725865"> </p>
+<p><strong>写在最后</strong>：</p>
+<p><strong>注意，这些只是基本的算法思路，实际的GC实现过程要复杂的多，目前还在发展中的前沿GC都是复合算法，并且并行和并发兼备。</strong></p>
 ]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
   </entry>
   <entry>
     <title>个人博客</title>
@@ -1014,6 +1074,27 @@
         <tag>导航</tag>
         <tag>分享</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/02/25/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>SSH的公钥和私钥的相关配置</title>
