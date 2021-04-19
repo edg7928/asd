@@ -881,34 +881,6 @@
       </tags>
   </entry>
   <entry>
-    <title>14_垃圾回收概述.md</title>
-    <url>/2021/04/16/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<h1 id="1、什么是垃圾？"><a href="#1、什么是垃圾？" class="headerlink" title="1、什么是垃圾？"></a>1、什么是垃圾？</h1><span id="more"></span>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090331691.png" alt="image-20210416090331691"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090509979.png" alt="image-20210416090509979"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090944477.png" alt="image-20210416090944477"> </p>
-<p><strong>大厂面试题</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090730731.png" alt="image-20210416090730731"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090823651.png" alt="image-20210416090823651"> </p>
-<h1 id="2、为什么需要GC？"><a href="#2、为什么需要GC？" class="headerlink" title="2、为什么需要GC？"></a>2、为什么需要GC？</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416091415130.png" alt="image-20210416091415130"> </p>
-<h1 id="3、早期垃圾回收"><a href="#3、早期垃圾回收" class="headerlink" title="3、早期垃圾回收"></a>3、早期垃圾回收</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092646732.png" alt="image-20210416092646732"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092820741.png" alt="image-20210416092820741"> </p>
-<h1 id="4、Java垃圾回收机制"><a href="#4、Java垃圾回收机制" class="headerlink" title="4、Java垃圾回收机制"></a>4、Java垃圾回收机制</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092938988.png" alt="image-20210416092938988"> </p>
-<p><strong>担忧</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093113740.png" alt="image-20210416093113740"> </p>
-<p><strong>应该关心哪些区域</strong>？</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093428860.png" alt="image-20210416093428860"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093638343.png" alt="image-20210416093638343"> </p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>15_垃圾回收相关算法</title>
     <url>/2021/04/18/15_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p><strong>从面试角度，这一章还是比较重要的</strong>！！！</p>
@@ -1026,6 +998,34 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>14_垃圾回收概述.md</title>
+    <url>/2021/04/16/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<h1 id="1、什么是垃圾？"><a href="#1、什么是垃圾？" class="headerlink" title="1、什么是垃圾？"></a>1、什么是垃圾？</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090331691.png" alt="image-20210416090331691"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090509979.png" alt="image-20210416090509979"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090944477.png" alt="image-20210416090944477"> </p>
+<p><strong>大厂面试题</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090730731.png" alt="image-20210416090730731"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090823651.png" alt="image-20210416090823651"> </p>
+<h1 id="2、为什么需要GC？"><a href="#2、为什么需要GC？" class="headerlink" title="2、为什么需要GC？"></a>2、为什么需要GC？</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416091415130.png" alt="image-20210416091415130"> </p>
+<h1 id="3、早期垃圾回收"><a href="#3、早期垃圾回收" class="headerlink" title="3、早期垃圾回收"></a>3、早期垃圾回收</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092646732.png" alt="image-20210416092646732"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092820741.png" alt="image-20210416092820741"> </p>
+<h1 id="4、Java垃圾回收机制"><a href="#4、Java垃圾回收机制" class="headerlink" title="4、Java垃圾回收机制"></a>4、Java垃圾回收机制</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092938988.png" alt="image-20210416092938988"> </p>
+<p><strong>担忧</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093113740.png" alt="image-20210416093113740"> </p>
+<p><strong>应该关心哪些区域</strong>？</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093428860.png" alt="image-20210416093428860"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093638343.png" alt="image-20210416093638343"> </p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
   </entry>
   <entry>
     <title>个人博客</title>
