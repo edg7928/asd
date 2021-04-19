@@ -214,6 +214,13 @@
   </url>
   
   <url>
+    <loc>httpss://edg7928.gitee.io/tags/Hexo博客/</loc>
+    <lastmod>2021-04-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>httpss://edg7928.gitee.io/tags/导航/</loc>
     <lastmod>2021-04-19</lastmod>
     <changefreq>daily</changefreq>
@@ -222,13 +229,6 @@
   
   <url>
     <loc>httpss://edg7928.gitee.io/tags/分享/</loc>
-    <lastmod>2021-04-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>httpss://edg7928.gitee.io/tags/Hexo博客/</loc>
     <lastmod>2021-04-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -279,13 +279,6 @@
   </url>
   
   <url>
-    <loc>httpss://edg7928.gitee.io/categories/前端/</loc>
-    <lastmod>2021-04-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>httpss://edg7928.gitee.io/categories/Hexo博客/</loc>
     <lastmod>2021-04-19</lastmod>
     <changefreq>daily</changefreq>
@@ -293,7 +286,7 @@
   </url>
   
   <url>
-    <loc>httpss://edg7928.gitee.io/categories/前端/后端/</loc>
+    <loc>httpss://edg7928.gitee.io/categories/前端/</loc>
     <lastmod>2021-04-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -307,7 +300,7 @@
   </url>
   
   <url>
-    <loc>httpss://edg7928.gitee.io/categories/前端/后端/Java/</loc>
+    <loc>httpss://edg7928.gitee.io/categories/前端/后端/</loc>
     <lastmod>2021-04-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -315,6 +308,13 @@
   
   <url>
     <loc>httpss://edg7928.gitee.io/categories/Hexo博客/SSH免密登录/</loc>
+    <lastmod>2021-04-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>httpss://edg7928.gitee.io/categories/前端/后端/Java/</loc>
     <lastmod>2021-04-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
