@@ -81,40 +81,6 @@
       </tags>
   </entry>
   <entry>
-    <title>04_程序计数器（PC寄存器）</title>
-    <url>/2021/04/15/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="1、PC-Register介绍"><a href="#1、PC-Register介绍" class="headerlink" title="1、PC Register介绍"></a>1、PC Register介绍</h1><span id="more"></span>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212158867.png" alt="image-20210406212158867"> </p>
-<p><strong>作用</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212426121.png" alt="image-20210406212426121"> </p>
-<p><strong>介绍</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214038007.png" alt="image-20210406214038007"> </p>
-<p>这最后一条的意思是，JVM的PC寄存器是Java层面的内容，native是调用的本地方法，所以是不显示的未指定值。</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214841462.png" alt="image-20210406214841462"> </p>
-<p>注：虚拟机栈不考虑垃圾回收，堆和方法区是由垃圾回收的；PC寄存器也不会内存溢出，其他的部分都有可能。</p>
-<h1 id="2、举例说明"><a href="#2、举例说明" class="headerlink" title="2、举例说明"></a>2、举例说明</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406215703126.png" alt="image-20210406215703126"> </p>
-<p>左边的数字是指令地址（或者叫偏移地址），这就是PC寄存器中存储的内容；右边的内容可以理解为操作指令</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220603758.png" alt="image-20210406220603758"> </p>
-<p>执行引擎从PC寄存器中存储的地址找到对应的指令，然后进行了转换为机器指令和操作局部变量表、操作数栈这两步骤。</p>
-<h1 id="3、两个常见问题"><a href="#3、两个常见问题" class="headerlink" title="3、两个常见问题"></a>3、两个常见问题</h1><h2 id="3-1、第一个问题"><a href="#3-1、第一个问题" class="headerlink" title="3.1、第一个问题"></a>3.1、第一个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220852415.png" alt="image-20210406220852415"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/%E7%AC%AC04%E7%AB%A0_PC%E5%AF%84%E5%AD%98%E5%99%A8.jpg" alt="第04章_PC寄存器"> </p>
-<h2 id="3-2、第二个问题"><a href="#3-2、第二个问题" class="headerlink" title="3.2、第二个问题"></a>3.2、第二个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221159909.png" alt="image-20210406221159909"> </p>
-<p><strong>CPU时间片</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221557214.png" alt="image-20210406221557214"> </p>
-<p>并行：某个时间段所有时间内一起执行。</p>
-<p>vs 串行：某个时间段内，挨着一个个排队来执行。</p>
-<p>并发：某个时间段内一起执行，由于切换速度很快，所以看成是并行，但是在某个时间点只有一个在执行。</p>
-<p>先了解一下，后边的垃圾回收还会讲。</p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>03_运行时数据区概述及线程</title>
     <url>/2021/04/15/03_%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><span id="more"></span>
@@ -246,6 +212,59 @@
       </tags>
   </entry>
   <entry>
+    <title>07_本地方法栈</title>
+    <url>/2021/04/15/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/</url>
+    <content><![CDATA[<p><strong>相关概念</strong>： </p>
+<span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094130147.png" alt="image-20210409094130147"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409095052762.png" alt="image-20210409095052762"> </p>
+<p><strong>举例</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094940990.png" alt="image-20210409094940990"> </p>
+<p>本章之前的内容回顾请看视频<a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=65">P65_JVM学习路线与内容回顾</a></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>04_程序计数器（PC寄存器）</title>
+    <url>/2021/04/15/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="1、PC-Register介绍"><a href="#1、PC-Register介绍" class="headerlink" title="1、PC Register介绍"></a>1、PC Register介绍</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212158867.png" alt="image-20210406212158867"> </p>
+<p><strong>作用</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406212426121.png" alt="image-20210406212426121"> </p>
+<p><strong>介绍</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214038007.png" alt="image-20210406214038007"> </p>
+<p>这最后一条的意思是，JVM的PC寄存器是Java层面的内容，native是调用的本地方法，所以是不显示的未指定值。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406214841462.png" alt="image-20210406214841462"> </p>
+<p>注：虚拟机栈不考虑垃圾回收，堆和方法区是由垃圾回收的；PC寄存器也不会内存溢出，其他的部分都有可能。</p>
+<h1 id="2、举例说明"><a href="#2、举例说明" class="headerlink" title="2、举例说明"></a>2、举例说明</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406215703126.png" alt="image-20210406215703126"> </p>
+<p>左边的数字是指令地址（或者叫偏移地址），这就是PC寄存器中存储的内容；右边的内容可以理解为操作指令</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220603758.png" alt="image-20210406220603758"> </p>
+<p>执行引擎从PC寄存器中存储的地址找到对应的指令，然后进行了转换为机器指令和操作局部变量表、操作数栈这两步骤。</p>
+<h1 id="3、两个常见问题"><a href="#3、两个常见问题" class="headerlink" title="3、两个常见问题"></a>3、两个常见问题</h1><h2 id="3-1、第一个问题"><a href="#3-1、第一个问题" class="headerlink" title="3.1、第一个问题"></a>3.1、第一个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406220852415.png" alt="image-20210406220852415"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/%E7%AC%AC04%E7%AB%A0_PC%E5%AF%84%E5%AD%98%E5%99%A8.jpg" alt="第04章_PC寄存器"> </p>
+<h2 id="3-2、第二个问题"><a href="#3-2、第二个问题" class="headerlink" title="3.2、第二个问题"></a>3.2、第二个问题</h2><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221159909.png" alt="image-20210406221159909"> </p>
+<p><strong>CPU时间片</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/04_%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88PC%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%89/image-20210406221557214.png" alt="image-20210406221557214"> </p>
+<p>并行：某个时间段所有时间内一起执行。</p>
+<p>vs 串行：某个时间段内，挨着一个个排队来执行。</p>
+<p>并发：某个时间段内一起执行，由于切换速度很快，所以看成是并行，但是在某个时间点只有一个在执行。</p>
+<p>先了解一下，后边的垃圾回收还会讲。</p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>06_本地方法接口</title>
     <url>/2021/04/15/06_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3/</url>
     <content><![CDATA[<p><strong>概念</strong>：</p>
@@ -260,25 +279,6 @@
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/06_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3/image-20210409092631545.png" alt="image-20210409092631545"> </p>
 <p><strong>现状</strong>：</p>
 <p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/06_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3/image-20210409093356186.png" alt="image-20210409093356186"> </p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>07_本地方法栈</title>
-    <url>/2021/04/15/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/</url>
-    <content><![CDATA[<p><strong>相关概念</strong>： </p>
-<span id="more"></span>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094130147.png" alt="image-20210409094130147"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409095052762.png" alt="image-20210409095052762"> </p>
-<p><strong>举例</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/07_%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/image-20210409094940990.png" alt="image-20210409094940990"> </p>
-<p>本章之前的内容回顾请看视频<a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=65">P65_JVM学习路线与内容回顾</a></p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -687,101 +687,6 @@
       </tags>
   </entry>
   <entry>
-    <title>12_执行引擎</title>
-    <url>/2021/04/15/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</url>
-    <content><![CDATA[<h1 id="1、执行引擎概述"><a href="#1、执行引擎概述" class="headerlink" title="1、执行引擎概述"></a>1、执行引擎概述</h1><span id="more"></span>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414102042869.png" alt="image-20210414102042869"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414101959189.png" alt="image-20210414101959189"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414150714268.png" alt="image-20210414150714268"> </p>
-<p>举例：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414151505428.png" alt="image-20210414151505428"> 注：这个翻译官就是执行引擎的角色。</p>
-<p><strong>执行引擎的工作过程</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414152454707.png" alt="image-20210414152454707"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414153146529.png" alt="image-20210414153146529"> </p>
-<h1 id="2、Java代码编译和执行过程"><a href="#2、Java代码编译和执行过程" class="headerlink" title="2、Java代码编译和执行过程"></a>2、Java代码编译和执行过程</h1><p><strong>整体流程</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.jpg" alt="第12章_程序执行过程"> </p>
-<p>注：大部分的程序代码转换成物理机的目标代码或者虚拟机能执行的指令集之前，都需要经过上图的各个步骤。</p>
-<p>橙色部分：由javac编译器完成的，或者称为前端编译器。Java是半解释型半编译型，绿色部分是解释，蓝色部分是编译。</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414154216864.png" alt="image-20210414154216864"> </p>
-<p>注：对应橙色的部分</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414154302407.png" alt="image-20210414154302407"> </p>
-<p>注：上边对应的是蓝色部分，下边对应的是绿色部分。</p>
-<p><strong>问题：什么是解释器（Interpreter）？什么是<code>JIT</code>编译器</strong>？</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414155123120.png" alt="image-20210414155123120"> </p>
-<p><strong>问题：为什么说Java是半编译半解释型语言</strong>？</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414155705712.png" alt="image-20210414155705712"> </p>
-<p><strong>注：解释器是指的送过来一条指令，就给翻译成本地机器指令，然后扔去执行，执行完就再接一条指令，翻译一下去执行，并没有将其保存下来；JIT编译器是指的一大段指令经常执行，然后将这一大段指令一块儿都翻译成本地机器指令，缓存起来，等啥时候用到了，直接拿过来用就行，这样就避免了重复翻译指令，节省了时间。</strong></p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E.jpg" alt="第12章_理解执行引擎"> </p>
-<h1 id="3、机器码、指令、汇编语言"><a href="#3、机器码、指令、汇编语言" class="headerlink" title="3、机器码、指令、汇编语言"></a>3、机器码、指令、汇编语言</h1><p><strong>机器码</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414161112061.png" alt="image-20210414161112061"> </p>
-<p><strong>指令</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414162902113.png" alt="image-20210414162902113"> </p>
-<p><strong>指令集</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414162928067.png" alt="image-20210414162928067"> </p>
-<p><strong>汇编语言</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414163248994.png" alt="image-20210414163248994"> </p>
-<p><strong>高级语言</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414163446661.png" alt="image-20210414163446661"> </p>
-<p><img src="/2021/04/15/12_执行引擎/%E7%AC%AC12%E7%AB%A0_%E6%9C%BA%E5%99%A8%E8%AF%AD%E8%A8%80%E3%80%81%E6%B1%87%E7%BC%96%E3%80%81%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80.jpg" alt="第12章_机器语言、汇编、高级语言"> </p>
-<p><strong>字节码</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414164350259.png" alt="image-20210414164350259"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414164138826.png" alt="image-20210414164138826"> </p>
-<h1 id="4、解释器"><a href="#4、解释器" class="headerlink" title="4、解释器"></a>4、解释器</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414164848506.png" alt="image-20210414164848506"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E7%90%86%E8%A7%A3%E4%B8%AD%E9%97%B4%E8%BF%87%E7%A8%8B.jpg" alt="第12章_理解中间过程"> </p>
-<p><strong>工作机制（或工作任务）</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414190839665.png" alt="image-20210414190839665"> </p>
-<p><strong>解释器分类（了解）</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414191027454.png" alt="image-20210414191027454"> </p>
-<p><strong>现状</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414191312410.png" alt="image-20210414191312410"> </p>
-<h1 id="5、JIT编译器"><a href="#5、JIT编译器" class="headerlink" title="5、JIT编译器"></a>5、JIT编译器</h1><p><strong>Java代码的执行分类</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414191650161.png" alt="image-20210414191650161"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414191731744.png" alt="image-20210414191731744"> </p>
-<p><strong>问题来了</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414192153232.png" alt="image-20210414192153232"> </p>
-<p><strong>HotSpot JVM的执行方式</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414192338761.png" alt="image-20210414192338761"> </p>
-<p><strong>案例来了</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414192614874.png" alt="image-20210414192614874"> </p>
-<p><strong>概念解释</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414193036922.png" alt="image-20210414193036922"> </p>
-<p><strong>热点代码及探测方式</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414193440073.png" alt="image-20210414193440073"> </p>
-<p><strong>多少次算是多（可以看成是热点代码）呢</strong>？</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414193541680.png" alt="image-20210414193541680"> </p>
-<p><strong>方法调用计数器</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414193808263.png" alt="image-20210414193808263"> </p>
-<p><strong>看图说话</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414194602325.png" alt="image-20210414194602325"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E8%AE%A1%E6%95%B0%E5%99%A8.jpg" alt="第12章_方法调用计数器"> </p>
-<p><strong>热度衰减</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414194909293.png" alt="image-20210414194909293"> </p>
-<p><strong>回边计数器</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414195146541.png" alt="image-20210414195146541"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E5%9B%9E%E8%BE%B9%E8%AE%A1%E6%95%B0%E5%99%A8.jpg" alt="第12章_回边计数器"> </p>
-<p><strong>HotSpot VM可以设置程序执行方式</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414195715788.png" alt="image-20210414195715788"> </p>
-<p>注：<code>java -Xint -version</code>；<code>java -Xcomp -version</code></p>
-<p><strong>HotSpot VM中的JIT分类</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414200853114.png" alt="image-20210414200853114"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414200950469.png" alt="image-20210414200950469"> </p>
-<p>注：了解就行。</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414201250122.png" alt="image-20210414201250122"> </p>
-<p><strong>写在最后1：Graal编译器</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414201340483.png" alt="image-20210414201340483"> </p>
-<p><strong>写在最后2：AOT编译器</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414201846643.png" alt="image-20210414201846643"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414201927273.png" alt="image-20210414201927273"> </p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-        <category>上篇：内存与GC</category>
-      </categories>
-      <tags>
-        <tag>JavaJVMNotes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>11_直接内存</title>
     <url>/2021/04/15/11_%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/</url>
     <content><![CDATA[<p><strong>概述</strong>：</p>
@@ -881,62 +786,91 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/02/25/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>git的autocrlf与safecrlf的相关设置</title>
-    <url>/2021/04/18/git%E7%9A%84autocrlf%E4%B8%8Esafecrlf%E7%9A%84%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE/</url>
-    <content><![CDATA[<p>git提交时的文件换行符LF与CRLF的相关问题</p>
-<span id="more"></span>
-<h1 id="一、AutoCRLF"><a href="#一、AutoCRLF" class="headerlink" title="一、AutoCRLF"></a>一、AutoCRLF</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 提交时转换为LF，检出时转换为CRLF</span></span><br><span class="line">git config --global core.autocrlf <span class="literal">true</span>   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时转换为LF，检出时不转换</span></span><br><span class="line">git config --global core.autocrlf input   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交检出均不转换</span></span><br><span class="line">git config --global core.autocrlf <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="二、SafeCRLF"><a href="#二、SafeCRLF" class="headerlink" title="二、SafeCRLF"></a>二、SafeCRLF</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 拒绝提交包含混合换行符的文件</span></span><br><span class="line">git config --global core.safecrlf <span class="literal">true</span>   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许提交包含混合换行符的文件</span></span><br><span class="line">git config --global core.safecrlf <span class="literal">false</span>   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交包含混合换行符的文件时给出警告</span></span><br><span class="line">git config --global core.safecrlf warn</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-        <tag>CRLF</tag>
-        <tag>LF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>14_垃圾回收概述.md</title>
-    <url>/2021/04/16/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<h1 id="1、什么是垃圾？"><a href="#1、什么是垃圾？" class="headerlink" title="1、什么是垃圾？"></a>1、什么是垃圾？</h1><span id="more"></span>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090331691.png" alt="image-20210416090331691"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090509979.png" alt="image-20210416090509979"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090944477.png" alt="image-20210416090944477"> </p>
-<p><strong>大厂面试题</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090730731.png" alt="image-20210416090730731"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090823651.png" alt="image-20210416090823651"> </p>
-<h1 id="2、为什么需要GC？"><a href="#2、为什么需要GC？" class="headerlink" title="2、为什么需要GC？"></a>2、为什么需要GC？</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416091415130.png" alt="image-20210416091415130"> </p>
-<h1 id="3、早期垃圾回收"><a href="#3、早期垃圾回收" class="headerlink" title="3、早期垃圾回收"></a>3、早期垃圾回收</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092646732.png" alt="image-20210416092646732"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092820741.png" alt="image-20210416092820741"> </p>
-<h1 id="4、Java垃圾回收机制"><a href="#4、Java垃圾回收机制" class="headerlink" title="4、Java垃圾回收机制"></a>4、Java垃圾回收机制</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092938988.png" alt="image-20210416092938988"> </p>
-<p><strong>担忧</strong>：</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093113740.png" alt="image-20210416093113740"> </p>
-<p><strong>应该关心哪些区域</strong>？</p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093428860.png" alt="image-20210416093428860"> </p>
-<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093638343.png" alt="image-20210416093638343"> </p>
+    <title>12_执行引擎</title>
+    <url>/2021/04/15/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</url>
+    <content><![CDATA[<h1 id="1、执行引擎概述"><a href="#1、执行引擎概述" class="headerlink" title="1、执行引擎概述"></a>1、执行引擎概述</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414102042869.png" alt="image-20210414102042869"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414101959189.png" alt="image-20210414101959189"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414150714268.png" alt="image-20210414150714268"> </p>
+<p>举例：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414151505428.png" alt="image-20210414151505428"> 注：这个翻译官就是执行引擎的角色。</p>
+<p><strong>执行引擎的工作过程</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414152454707.png" alt="image-20210414152454707"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414153146529.png" alt="image-20210414153146529"> </p>
+<h1 id="2、Java代码编译和执行过程"><a href="#2、Java代码编译和执行过程" class="headerlink" title="2、Java代码编译和执行过程"></a>2、Java代码编译和执行过程</h1><p><strong>整体流程</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.jpg" alt="第12章_程序执行过程"> </p>
+<p>注：大部分的程序代码转换成物理机的目标代码或者虚拟机能执行的指令集之前，都需要经过上图的各个步骤。</p>
+<p>橙色部分：由javac编译器完成的，或者称为前端编译器。Java是半解释型半编译型，绿色部分是解释，蓝色部分是编译。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414154216864.png" alt="image-20210414154216864"> </p>
+<p>注：对应橙色的部分</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414154302407.png" alt="image-20210414154302407"> </p>
+<p>注：上边对应的是蓝色部分，下边对应的是绿色部分。</p>
+<p><strong>问题：什么是解释器（Interpreter）？什么是<code>JIT</code>编译器</strong>？</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414155123120.png" alt="image-20210414155123120"> </p>
+<p><strong>问题：为什么说Java是半编译半解释型语言</strong>？</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414155705712.png" alt="image-20210414155705712"> </p>
+<p><strong>注：解释器是指的送过来一条指令，就给翻译成本地机器指令，然后扔去执行，执行完就再接一条指令，翻译一下去执行，并没有将其保存下来；JIT编译器是指的一大段指令经常执行，然后将这一大段指令一块儿都翻译成本地机器指令，缓存起来，等啥时候用到了，直接拿过来用就行，这样就避免了重复翻译指令，节省了时间。</strong></p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E.jpg" alt="第12章_理解执行引擎"> </p>
+<h1 id="3、机器码、指令、汇编语言"><a href="#3、机器码、指令、汇编语言" class="headerlink" title="3、机器码、指令、汇编语言"></a>3、机器码、指令、汇编语言</h1><p><strong>机器码</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414161112061.png" alt="image-20210414161112061"> </p>
+<p><strong>指令</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414162902113.png" alt="image-20210414162902113"> </p>
+<p><strong>指令集</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414162928067.png" alt="image-20210414162928067"> </p>
+<p><strong>汇编语言</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414163248994.png" alt="image-20210414163248994"> </p>
+<p><strong>高级语言</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414163446661.png" alt="image-20210414163446661"> </p>
+<p><img src="/2021/04/15/12_执行引擎/%E7%AC%AC12%E7%AB%A0_%E6%9C%BA%E5%99%A8%E8%AF%AD%E8%A8%80%E3%80%81%E6%B1%87%E7%BC%96%E3%80%81%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80.jpg" alt="第12章_机器语言、汇编、高级语言"> </p>
+<p><strong>字节码</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414164350259.png" alt="image-20210414164350259"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414164138826.png" alt="image-20210414164138826"> </p>
+<h1 id="4、解释器"><a href="#4、解释器" class="headerlink" title="4、解释器"></a>4、解释器</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414164848506.png" alt="image-20210414164848506"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E7%90%86%E8%A7%A3%E4%B8%AD%E9%97%B4%E8%BF%87%E7%A8%8B.jpg" alt="第12章_理解中间过程"> </p>
+<p><strong>工作机制（或工作任务）</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414190839665.png" alt="image-20210414190839665"> </p>
+<p><strong>解释器分类（了解）</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414191027454.png" alt="image-20210414191027454"> </p>
+<p><strong>现状</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414191312410.png" alt="image-20210414191312410"> </p>
+<h1 id="5、JIT编译器"><a href="#5、JIT编译器" class="headerlink" title="5、JIT编译器"></a>5、JIT编译器</h1><p><strong>Java代码的执行分类</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414191650161.png" alt="image-20210414191650161"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414191731744.png" alt="image-20210414191731744"> </p>
+<p><strong>问题来了</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414192153232.png" alt="image-20210414192153232"> </p>
+<p><strong>HotSpot JVM的执行方式</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414192338761.png" alt="image-20210414192338761"> </p>
+<p><strong>案例来了</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414192614874.png" alt="image-20210414192614874"> </p>
+<p><strong>概念解释</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414193036922.png" alt="image-20210414193036922"> </p>
+<p><strong>热点代码及探测方式</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414193440073.png" alt="image-20210414193440073"> </p>
+<p><strong>多少次算是多（可以看成是热点代码）呢</strong>？</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414193541680.png" alt="image-20210414193541680"> </p>
+<p><strong>方法调用计数器</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414193808263.png" alt="image-20210414193808263"> </p>
+<p><strong>看图说话</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414194602325.png" alt="image-20210414194602325"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E8%AE%A1%E6%95%B0%E5%99%A8.jpg" alt="第12章_方法调用计数器"> </p>
+<p><strong>热度衰减</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414194909293.png" alt="image-20210414194909293"> </p>
+<p><strong>回边计数器</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414195146541.png" alt="image-20210414195146541"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/%E7%AC%AC12%E7%AB%A0_%E5%9B%9E%E8%BE%B9%E8%AE%A1%E6%95%B0%E5%99%A8.jpg" alt="第12章_回边计数器"> </p>
+<p><strong>HotSpot VM可以设置程序执行方式</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414195715788.png" alt="image-20210414195715788"> </p>
+<p>注：<code>java -Xint -version</code>；<code>java -Xcomp -version</code></p>
+<p><strong>HotSpot VM中的JIT分类</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414200853114.png" alt="image-20210414200853114"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414200950469.png" alt="image-20210414200950469"> </p>
+<p>注：了解就行。</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414201250122.png" alt="image-20210414201250122"> </p>
+<p><strong>写在最后1：Graal编译器</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414201340483.png" alt="image-20210414201340483"> </p>
+<p><strong>写在最后2：AOT编译器</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414201846643.png" alt="image-20210414201846643"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/12_%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/image-20210414201927273.png" alt="image-20210414201927273"> </p>
 ]]></content>
       <categories>
         <category>JVM</category>
@@ -1026,6 +960,72 @@
       <tags>
         <tag>JavaJVMNotes</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>14_垃圾回收概述.md</title>
+    <url>/2021/04/16/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<h1 id="1、什么是垃圾？"><a href="#1、什么是垃圾？" class="headerlink" title="1、什么是垃圾？"></a>1、什么是垃圾？</h1><span id="more"></span>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090331691.png" alt="image-20210416090331691"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090509979.png" alt="image-20210416090509979"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090944477.png" alt="image-20210416090944477"> </p>
+<p><strong>大厂面试题</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090730731.png" alt="image-20210416090730731"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416090823651.png" alt="image-20210416090823651"> </p>
+<h1 id="2、为什么需要GC？"><a href="#2、为什么需要GC？" class="headerlink" title="2、为什么需要GC？"></a>2、为什么需要GC？</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416091415130.png" alt="image-20210416091415130"> </p>
+<h1 id="3、早期垃圾回收"><a href="#3、早期垃圾回收" class="headerlink" title="3、早期垃圾回收"></a>3、早期垃圾回收</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092646732.png" alt="image-20210416092646732"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092820741.png" alt="image-20210416092820741"> </p>
+<h1 id="4、Java垃圾回收机制"><a href="#4、Java垃圾回收机制" class="headerlink" title="4、Java垃圾回收机制"></a>4、Java垃圾回收机制</h1><p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416092938988.png" alt="image-20210416092938988"> </p>
+<p><strong>担忧</strong>：</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093113740.png" alt="image-20210416093113740"> </p>
+<p><strong>应该关心哪些区域</strong>？</p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093428860.png" alt="image-20210416093428860"> </p>
+<p><img src="https://gitee.com/edg7928/jvmnotes/raw/master/14_%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0/image-20210416093638343.png" alt="image-20210416093638343"> </p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+        <category>上篇：内存与GC</category>
+      </categories>
+      <tags>
+        <tag>JavaJVMNotes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git的autocrlf与safecrlf的相关设置</title>
+    <url>/2021/04/18/git%E7%9A%84autocrlf%E4%B8%8Esafecrlf%E7%9A%84%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<p>git提交时的文件换行符LF与CRLF的相关问题</p>
+<span id="more"></span>
+<h1 id="一、AutoCRLF"><a href="#一、AutoCRLF" class="headerlink" title="一、AutoCRLF"></a>一、AutoCRLF</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 提交时转换为LF，检出时转换为CRLF</span></span><br><span class="line">git config --global core.autocrlf <span class="literal">true</span>   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时转换为LF，检出时不转换</span></span><br><span class="line">git config --global core.autocrlf input   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交检出均不转换</span></span><br><span class="line">git config --global core.autocrlf <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="二、SafeCRLF"><a href="#二、SafeCRLF" class="headerlink" title="二、SafeCRLF"></a>二、SafeCRLF</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 拒绝提交包含混合换行符的文件</span></span><br><span class="line">git config --global core.safecrlf <span class="literal">true</span>   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许提交包含混合换行符的文件</span></span><br><span class="line">git config --global core.safecrlf <span class="literal">false</span>   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交包含混合换行符的文件时给出警告</span></span><br><span class="line">git config --global core.safecrlf warn</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>CRLF</tag>
+        <tag>LF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/02/25/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>个人博客</title>
